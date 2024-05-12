@@ -1,0 +1,35 @@
+.form-input {
+  display: flex;
+  flex-direction: column;
+  gap: 8.5px;
+
+  font-family: Helvetica, sans-serif;
+  font-weight: 400;
+
+  label {
+    font-size: 10.5px;
+    line-height: 12.07px;
+    color: rgb(73 80 87 / 100%);
+    letter-spacing: -0.18px;
+  }
+
+  input {
+    padding: 8px 11px;
+
+    font-size: 11px;
+    line-height: 12.65px;
+    letter-spacing: -0.19px;
+
+    border: 1px solid rgb(190 202 214 / 100%);
+    border-radius: 4px;
+
+    &::placeholder {
+      color: rgb(190 202 214 / 100%);
+    }
+
+    &:focus {
+      border-color: var(--c-blue);
+      outline: none;
+    }
+  }
+}

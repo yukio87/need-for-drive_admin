@@ -1,0 +1,13 @@
+.logo {
+  display: flex;
+  gap: 11.5px;
+  align-items: center;
+}
+
+.text {
+  font-family: Helvetica, sans-serif;
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 27.6px;
+  color: var(--c-text-primary);
+}

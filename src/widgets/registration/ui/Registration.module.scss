@@ -1,0 +1,46 @@
+.login-form-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16.5px;
+  align-items: center;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 35.5px;
+
+  width: 376.5px;
+  padding: 20px 17px;
+
+  font-family: Helvetica, sans-serif;
+  font-weight: 400;
+
+  background-color: #fff;
+  border-radius: 15px;
+  box-shadow: -2px 2px 15px var(--c-grey);
+
+  @media (max-width: 410px) {
+    width: 300px;
+  }
+}
+
+.title {
+  font-size: 17.5px;
+  line-height: 20.12px;
+  color: var(--c-text-primary);
+  text-align: center;
+  letter-spacing: -0.44px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.buttons {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
