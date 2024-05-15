@@ -2,7 +2,7 @@ import { Toaster } from 'react-hot-toast'
 
 import { colorTextPrimary } from '@/shared/consts/colors'
 
-export function ToastsProvider() {
+export const ToastsProvider = () => {
   return (
     <Toaster
       position="top-center"

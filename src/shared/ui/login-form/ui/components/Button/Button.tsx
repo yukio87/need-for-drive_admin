@@ -1,9 +1,13 @@
-import styles from './Button.module.scss'
-import { ButtonProps } from './types/types'
+import { FC } from 'react'
 
-export function Button({ children }: ButtonProps) {
+import styles from './Button.module.scss'
+import { ButtonProps } from './type'
+
+const { button } = styles
+
+export const Button: FC<ButtonProps> = ({ children }) => {
   return (
-    <button className={styles.button} type="submit">
+    <button className={button} type="submit">
       {children}
     </button>
   )

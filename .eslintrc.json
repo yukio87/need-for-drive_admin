@@ -49,6 +49,10 @@
         "ignorePropertyModificationsFor": ["state"]
       }
     ],
-    "react/jsx-filename-extension": ["error", { "extensions": [".tsx"] }]
+    "react/jsx-filename-extension": ["error", { "extensions": [".tsx"] }],
+    "react/function-component-definition": [
+      "error",
+      { "namedComponents": "arrow-function" }
+    ]
   }
 }

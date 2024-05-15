@@ -1,7 +1,10 @@
-import { Children } from '@/types/types'
+import { FC } from 'react'
 
 import styles from './LayoutLogin.module.scss'
+import { LayoutLoginProps } from './type'
 
-export function LayoutLogin({ children }: Children) {
-  return <div className={styles.layout}>{children}</div>
+const { layout } = styles
+
+export const LayoutLogin: FC<LayoutLoginProps> = ({ children }) => {
+  return <div className={layout}>{children}</div>
 }

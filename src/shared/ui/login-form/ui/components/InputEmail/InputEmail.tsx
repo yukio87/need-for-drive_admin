@@ -1,14 +1,16 @@
-import { useContext } from 'react'
+import { FC, useContext } from 'react'
 
 import { LoginFormContext } from '../../LoginForm'
 import styles from './InputEmail.module.scss'
-import { InputEmailProps } from './types/types'
+import { InputEmailProps } from './type'
 
-export function InputEmail({ children }: InputEmailProps) {
+const { 'form-input': formInput } = styles
+
+export const InputEmail: FC<InputEmailProps> = ({ children }) => {
   const { emailVal, handleEmail } = useContext(LoginFormContext)
 
   return (
-    <div className={styles['form-input']}>
+    <div className={formInput}>
       <label htmlFor="email">{children}</label>
       <input
         type="email"

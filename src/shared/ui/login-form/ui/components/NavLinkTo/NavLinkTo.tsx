@@ -1,11 +1,14 @@
+import { FC } from 'react'
 import { NavLink } from 'react-router-dom'
 
 import styles from './NavLinkTo.module.scss'
-import { NavLinkToProps } from './types/types'
+import { NavLinkToProps } from './type'
 
-export function NavLinkTo({ children, to }: NavLinkToProps) {
+const { link } = styles
+
+export const NavLinkTo: FC<NavLinkToProps> = ({ children, to }) => {
   return (
-    <NavLink to={to} className={styles.link}>
+    <NavLink to={to} className={link}>
       {children}
     </NavLink>
   )

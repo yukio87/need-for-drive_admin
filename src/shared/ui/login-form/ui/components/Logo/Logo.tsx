@@ -3,11 +3,13 @@ import { Icon } from '@/shared/ui/icon'
 import { iconBasicStyles } from './consts/styles'
 import styles from './Logo.module.scss'
 
-export function Logo() {
+const { logo, text } = styles
+
+export const Logo = () => {
   return (
-    <div className={styles.logo}>
+    <div className={logo}>
       <Icon name="iconArrow" styles={iconBasicStyles} />
-      <span className={styles.text}>Need for drive</span>
+      <span className={text}>Need for drive</span>
     </div>
   )
 }

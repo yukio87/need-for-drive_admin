@@ -8,7 +8,7 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 
 // import { Provider } from 'react-redux'
-import App from '@/app/App'
+import { App } from '@/app/App'
 import { ToastsProvider } from '@/features/show-message'
 // import { store } from '@/app/store/store'
 

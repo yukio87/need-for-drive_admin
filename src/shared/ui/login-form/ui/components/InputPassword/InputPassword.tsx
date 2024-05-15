@@ -1,13 +1,15 @@
-import { useContext, useState } from 'react'
+import { FC, useContext, useState } from 'react'
 
 import { Icon } from '@/shared/ui/icon'
 
 import { LoginFormContext } from '../../LoginForm'
 import { iconBasicStyles } from './consts/styles'
 import styles from './InputPassword.module.scss'
-import { InputPasswordProps } from './types/types'
+import { InputPasswordProps } from './type'
 
-export function InputPassword({ children }: InputPasswordProps) {
+const { 'form-input': formInput, eye } = styles
+
+export const InputPassword: FC<InputPasswordProps> = ({ children }) => {
   const [showPassword, setShowPassword] = useState(false)
   const { passwordVal, handlePassword } = useContext(LoginFormContext)
 
@@ -16,12 +18,8 @@ export function InputPassword({ children }: InputPasswordProps) {
   }
 
   return (
-    <div className={styles['form-input']}>
-      <div
-        className={styles.eye}
-        onClick={toggleShowPassword}
-        aria-hidden={true}
-      >
+    <div className={formInput}>
+      <div className={eye} onClick={toggleShowPassword} aria-hidden={true}>
         <Icon
           name={showPassword ? `IconEyeSlash` : 'IconEye'}
           styles={iconBasicStyles}

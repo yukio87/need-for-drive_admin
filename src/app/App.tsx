@@ -4,8 +4,6 @@ import { appRouter } from './app-router/appRouter'
 
 const isLoggedIn = true // временно
 
-function App() {
+export const App = () => {
   return <RouterProvider router={appRouter(isLoggedIn)} />
 }
-
-export default App

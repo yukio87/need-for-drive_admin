@@ -1,15 +1,16 @@
+import { FC } from 'react'
 import Spinner from 'react-bootstrap/Spinner'
 
 import { colorGrey } from '@/shared/consts/colors'
 
-import { LoaderProps } from '../types/types'
+import { LoaderProps } from './type'
 
-export function Loader({
+export const Loader: FC<LoaderProps> = ({
   size,
   animation,
   position = 'center',
   color = colorGrey,
-}: LoaderProps) {
+}) => {
   const containerStyles = {
     display: 'grid',
     height: '100%',

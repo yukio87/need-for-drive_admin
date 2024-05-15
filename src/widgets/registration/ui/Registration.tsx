@@ -12,7 +12,15 @@ import { LoginForm } from '@/shared/ui/login-form'
 
 import styles from './Registration.module.scss'
 
-export function Registration() {
+const {
+  'login-form-container': loginFormContainer,
+  content,
+  title,
+  form,
+  buttons,
+} = styles
+
+export const Registration = () => {
   const [emailVal, setEmailVal] = useState('')
   const [passwordVal, setPasswordVal] = useState('')
   const [confPasswordVal, setConfPasswordVal] = useState('')
@@ -62,19 +70,19 @@ export function Registration() {
         handleConfPassword,
       }}
     >
-      <div className={styles['login-form-container']}>
+      <div className={loginFormContainer}>
         <LoginForm.Logo />
-        <div className={styles.content}>
-          <div className={styles.title}>
+        <div className={content}>
+          <div className={title}>
             <LoginForm.Title>Регистрация</LoginForm.Title>
           </div>
-          <form className={styles.form} onSubmit={handleSubmit} noValidate>
+          <form className={form} onSubmit={handleSubmit} noValidate>
             <LoginForm.InputEmail>Почта</LoginForm.InputEmail>
             <LoginForm.InputPassword>Пароль</LoginForm.InputPassword>
             <LoginForm.InputConfPassword>
               Подтвердите пароль
             </LoginForm.InputConfPassword>
-            <div className={styles.buttons}>
+            <div className={buttons}>
               <LoginForm.Button>Регистрация</LoginForm.Button>
             </div>
           </form>

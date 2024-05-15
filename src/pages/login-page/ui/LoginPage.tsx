@@ -1,7 +1,7 @@
 import { LayoutLogin } from '@/shared/ui/layout-login'
 import { Login } from '@/widgets/login'
 
-export function LoginPage() {
+export const LoginPage = () => {
   return (
     <LayoutLogin>
       <Login />

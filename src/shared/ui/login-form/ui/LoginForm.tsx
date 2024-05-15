@@ -1,6 +1,5 @@
 import { createContext, useMemo } from 'react'
 
-import { LoginFormContextType, LoginFormProps } from '../types/types'
 import {
   Button,
   InputConfPassword,
@@ -10,14 +9,13 @@ import {
   NavLinkTo,
   Title,
 } from './components'
+import { LoginFormContextType, LoginFormProps } from './type'
 
 export const LoginFormContext = createContext<LoginFormContextType | undefined>(
   undefined,
 )
 
-export function LoginForm(props: LoginFormProps) {
-  const { data, children } = props
-
+export const LoginForm = ({ data, children }: LoginFormProps) => {
   const {
     emailVal,
     passwordVal,

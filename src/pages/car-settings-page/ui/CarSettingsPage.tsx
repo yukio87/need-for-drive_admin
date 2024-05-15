@@ -1,3 +1,3 @@
-export function CarSettingsPage() {
+export const CarSettingsPage = () => {
   return <div>CarSettingsPage</div>
 }
