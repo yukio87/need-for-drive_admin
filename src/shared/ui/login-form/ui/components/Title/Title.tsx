@@ -1,6 +1,10 @@
-import styles from './Title.module.scss'
-import { TitleProps } from './types/types'
+import { FC } from 'react'
 
-export function Title({ children }: TitleProps) {
-  return <div className={styles.title}>{children}</div>
+import styles from './Title.module.scss'
+import { TitleProps } from './type'
+
+const { title } = styles
+
+export const Title: FC<TitleProps> = ({ children }) => {
+  return <div className={title}>{children}</div>
 }

@@ -1,3 +1,4 @@
+import { FC } from 'react'
 import { createBrowserRouter, Navigate } from 'react-router-dom'
 
 import { CarSettingsPage } from '@/pages/car-settings-page'
@@ -7,7 +8,7 @@ import { RegistrationPage } from '@/pages/registration-page'
 import { TablePage } from '@/pages/table-page'
 import { routesPaths } from '@/shared/consts/routesPaths'
 
-import { ProtectedRouteProps } from './types/types'
+import { ProtectedRouteProps } from './type'
 
 const {
   pathLogin,
@@ -17,13 +18,13 @@ const {
   pathOrderList,
 } = routesPaths
 
-function ProtectedRoute({ isAllowed, children }: ProtectedRouteProps) {
+const ProtectedRoute: FC<ProtectedRouteProps> = ({ isAllowed, children }) => {
   if (!isAllowed) return <Navigate to={pathLogin} />
 
   return children
 }
 
-export function appRouter(isLoggedIn: boolean) {
+export const appRouter = (isLoggedIn: boolean) => {
   return createBrowserRouter([
     {
       path: pathLogin,

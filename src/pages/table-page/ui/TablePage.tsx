@@ -1,3 +1,3 @@
-export function TablePage() {
+export const TablePage = () => {
   return <div>TablePage</div>
 }

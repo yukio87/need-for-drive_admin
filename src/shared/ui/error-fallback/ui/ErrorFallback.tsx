@@ -1,12 +1,16 @@
-import { ErrorFallbackProps } from '../types/types'
-import styles from './ErrorFallback.module.scss'
+import { FC } from 'react'
 
-export function ErrorFallback({
+import styles from './ErrorFallback.module.scss'
+import { ErrorFallbackProps } from './type'
+
+const { container } = styles
+
+export const ErrorFallback: FC<ErrorFallbackProps> = ({
   error,
   resetErrorBoundary,
-}: ErrorFallbackProps) {
+}) => {
   return (
-    <div role="alert" className={styles.container}>
+    <div role="alert" className={container}>
       <h6>Что-то пошло не так...</h6>
       <p>{error.message}</p>
       <button onClick={resetErrorBoundary} type="button">

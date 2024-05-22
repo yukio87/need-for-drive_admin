@@ -1,3 +1,3 @@
-export function OrderListPage() {
+export const OrderListPage = () => {
   return <div>OrderListPage</div>
 }
