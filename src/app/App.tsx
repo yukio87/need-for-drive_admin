@@ -1,9 +1,12 @@
+import { useSelector } from 'react-redux'
 import { RouterProvider } from 'react-router-dom'
+
+import { getIsAuthAdmin } from '@/widgets/login'
 
 import { appRouter } from './app-router/appRouter'
 
-const isLoggedIn = true // временно
-
 export const App = () => {
-  return <RouterProvider router={appRouter(isLoggedIn)} />
+  const isAuthAdmin = useSelector(getIsAuthAdmin)
+
+  return <RouterProvider router={appRouter(isAuthAdmin)} />
 }

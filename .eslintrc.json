@@ -42,13 +42,7 @@
     "import/extensions": "off",
     "import/prefer-default-export": "off",
     "react/jsx-props-no-spreading": "off",
-    "no-param-reassign": [
-      "error",
-      {
-        "props": true,
-        "ignorePropertyModificationsFor": ["state"]
-      }
-    ],
+    "no-param-reassign": ["error", { "props": false }],
     "react/jsx-filename-extension": ["error", { "extensions": [".tsx"] }],
     "react/function-component-definition": [
       "error",

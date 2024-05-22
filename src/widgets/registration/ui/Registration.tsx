@@ -1,13 +1,16 @@
+import { useMutation } from '@tanstack/react-query'
 import { useState } from 'react'
 import toast from 'react-hot-toast'
 import { useNavigate } from 'react-router-dom'
 
+import AuthService from '@/shared/api/AuthService'
 import { routesPaths } from '@/shared/consts/routesPaths'
 import {
   getIsValidConfPassword,
   getIsValidEmail,
   getIsValidPassword,
 } from '@/shared/lib/validate'
+import { Loader } from '@/shared/ui/loader'
 import { LoginForm } from '@/shared/ui/login-form'
 
 import styles from './Registration.module.scss'
@@ -25,6 +28,16 @@ export const Registration = () => {
   const [passwordVal, setPasswordVal] = useState('')
   const [confPasswordVal, setConfPasswordVal] = useState('')
   const navigate = useNavigate()
+
+  const { isPending, mutate } = useMutation({
+    mutationFn: () =>
+      AuthService.registration(emailVal.toLowerCase().trim(), passwordVal),
+    onSuccess: () => {
+      navigate(pathLogin)
+      toast.success('Регистрация успешно пройдена')
+    },
+    onError: () => toast.error('Не удалось зарегистрироваться...'),
+  })
 
   const { pathLogin } = routesPaths
 
@@ -49,15 +62,15 @@ export const Registration = () => {
       confPasswordVal,
     )
 
-    if (isValidEmail && isValidPassword && IsValidConfPassword) {
-      // console.log(`Почта ${emailVal.toLowerCase().trim()}`)
-      // console.log(`Пароль ${passwordVal}`)
-      // Написать функциональную часть из F-8
-
-      navigate(pathLogin)
-      toast.success('Регистрация успешно пройдена')
-    }
+    if (isValidEmail && isValidPassword && IsValidConfPassword) mutate()
   }
+
+  if (isPending)
+    return (
+      <div style={{ height: '100vh' }}>
+        <Loader size="60px" animation="grow" />
+      </div>
+    )
 
   return (
     <LoginForm

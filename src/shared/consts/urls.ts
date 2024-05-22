@@ -1,3 +1,6 @@
-export const baseURL = 'example'
+export const baseURL = 'https://frontend-study.simbirsoft.dev/api'
 
-export const urlExample = '/example'
+export const urlRegister = '/auth/register'
+export const urlLogin = '/auth/login'
+export const urlLogout = '/auth/logout'
+export const urlRefresh = '/auth/refresh'
