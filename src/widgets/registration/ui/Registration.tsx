@@ -3,7 +3,7 @@ import { useState } from 'react'
 import toast from 'react-hot-toast'
 import { useNavigate } from 'react-router-dom'
 
-import AuthService from '@/shared/api/AuthService'
+import AuthService from '@/shared/api/AuthService/AuthService'
 import { routesPaths } from '@/shared/consts/routesPaths'
 import {
   getIsValidConfPassword,
@@ -12,6 +12,7 @@ import {
 } from '@/shared/lib/validate'
 import { Loader } from '@/shared/ui/loader'
 import { LoginForm } from '@/shared/ui/login-form'
+import { StyledLoader } from '@/shared/ui/styled-loader'
 
 import styles from './Registration.module.scss'
 
@@ -67,9 +68,9 @@ export const Registration = () => {
 
   if (isPending)
     return (
-      <div style={{ height: '100vh' }}>
+      <StyledLoader>
         <Loader size="60px" animation="grow" />
-      </div>
+      </StyledLoader>
     )
 
   return (

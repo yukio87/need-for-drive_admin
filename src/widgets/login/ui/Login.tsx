@@ -6,12 +6,13 @@ import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
 import { $api } from '@/shared/api/api'
-import AuthService from '@/shared/api/AuthService'
+import AuthService from '@/shared/api/AuthService/AuthService'
 import { routesPaths } from '@/shared/consts/routesPaths'
 import { saveCookieValue } from '@/shared/lib/cookie'
 import { getIsValidEmail, getIsValidPassword } from '@/shared/lib/validate'
 import { Loader } from '@/shared/ui/loader'
 import { LoginForm } from '@/shared/ui/login-form'
+import { StyledLoader } from '@/shared/ui/styled-loader'
 
 import { setIsAuth } from '../model/slice'
 import styles from './Login.module.scss'
@@ -37,7 +38,7 @@ export const Login = () => {
       AuthService.login(
         emailVal.toLowerCase().trim(),
         passwordVal,
-        emailVal === 'intern', // ?
+        emailVal === 'intern',
         setBasicToken,
       ),
     onSuccess: (data: LoginData) => {
@@ -73,21 +74,17 @@ export const Login = () => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const isValidEmail = getIsValidEmail(emailVal)
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const isValidPassword = getIsValidPassword(passwordVal)
 
-    // if (isValidEmail && isValidPassword) {
-    mutate()
-    // }
+    if (isValidEmail && isValidPassword) mutate()
   }
 
   if (isPending)
     return (
-      <div style={{ height: '100vh' }}>
+      <StyledLoader>
         <Loader size="60px" animation="grow" />
-      </div>
+      </StyledLoader>
     )
 
   return (

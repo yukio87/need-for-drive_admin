@@ -8,7 +8,7 @@ import {
   saveCookieValue,
 } from '@/shared/lib/cookie'
 
-import AuthService from './AuthService'
+import AuthService from './AuthService/AuthService'
 import { CustomAxiosRequestConfig } from './type'
 
 export const $api = axios.create({
@@ -36,11 +36,11 @@ $api.interceptors.response.use(
         $api.defaults.headers.common.Authorization = `Bearer ${response.data.access_token}`
         return $api(originalRequest)
       } catch (refreshError) {
+        toast.error('Что-то пошло не так...')
         removeCookieValue('accessToken')
         removeCookieValue('refreshToken')
         removeCookieValue('basicToken')
-        window.location.href = '/'
-        toast.error('Что-то пошло не так...')
+        window.location.href = '/login'
         return Promise.reject(refreshError)
       }
     }

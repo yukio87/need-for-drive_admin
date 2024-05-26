@@ -2,10 +2,11 @@ import { AxiosResponse } from 'axios'
 
 import { AuthResponse } from '@/types/type'
 
-import { urlLogin, urlLogout, urlRefresh, urlRegister } from '../consts/urls'
-import { getCookieValue } from '../lib/cookie'
-import { genRndHash } from '../lib/generate'
-import { $api } from './api'
+import { urlLogin, urlLogout, urlRefresh, urlRegister } from '../../consts/urls'
+import { getCookieValue } from '../../lib/cookie'
+import { genRndHash } from '../../lib/generate'
+import { $api } from '../api'
+import { headers } from './consts/headers'
 
 export default class AuthService {
   static async login(
@@ -19,20 +20,14 @@ export default class AuthService {
 
     setBasicToken(isAdmin ? basicTokenAdmin : basicToken)
 
-    const headers = {
-      'Content-Type': 'application/json',
-      'X-Api-Factory-Application-Id': process.env.APP_ID,
-      Authorization: `Basic ${basicToken}`,
-    }
-    const headersAdmin = {
-      'Content-Type': 'application/json',
-      Authorization: `Basic ${basicTokenAdmin}`,
-    }
+    headers.Authorization = isAdmin
+      ? `Basic ${basicTokenAdmin}`
+      : `Basic ${basicToken}`
 
     return $api.post<AuthResponse>(
       urlLogin,
       { username: email, password },
-      { headers: isAdmin ? headersAdmin : headers },
+      { headers },
     )
   }
 
@@ -40,10 +35,6 @@ export default class AuthService {
     email: string,
     password: string,
   ): Promise<AxiosResponse<AuthResponse>> {
-    const headers = {
-      'Content-Type': 'application/json',
-      'X-Api-Factory-Application-Id': process.env.APP_ID,
-    }
     return $api.post<AuthResponse>(
       urlRegister,
       { username: email, password },
@@ -52,23 +43,22 @@ export default class AuthService {
   }
 
   static async logout(): Promise<void> {
-    const headers = {
-      'X-Api-Factory-Application-Id': process.env.APP_ID,
-      Authorization: `Bearer ${getCookieValue('accessToken')}`,
-    }
+    headers.Authorization = `Bearer ${getCookieValue('accessToken')}`
     return $api.post(urlLogout, { headers })
   }
 
   static async refreshToken(): Promise<AxiosResponse<AuthResponse>> {
-    const headers = {
-      'Content-Type': 'application/json',
-      'X-Api-Factory-Application-Id': process.env.APP_ID,
-      Authorization: `Basic ${getCookieValue('basicToken')}`,
-    }
+    headers.Authorization = `Basic ${getCookieValue('basicToken')}`
     return $api.post(
       urlRefresh,
       { refresh_token: getCookieValue('refreshToken') },
       { headers },
     )
+  }
+
+  // Временно для проверки
+  static async getOrders(): Promise<AxiosResponse<AuthResponse>> {
+    headers.Authorization = `Bearer ${getCookieValue('accessToken')}`
+    return $api.get('/db/order', { headers })
   }
 }

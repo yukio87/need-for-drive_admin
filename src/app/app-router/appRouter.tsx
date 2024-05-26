@@ -14,6 +14,10 @@ const { pathLogin, pathRegistration, pathCarSettings, pathTable } = routesPaths
 export const appRouter = () => {
   return createBrowserRouter([
     {
+      path: '/',
+      element: <OrderListPage />,
+    },
+    {
       path: pathLogin,
       element: <LoginPage />,
     },
@@ -30,10 +34,6 @@ export const appRouter = () => {
       ),
 
       children: [
-        {
-          path: '/',
-          element: <OrderListPage />,
-        },
         {
           path: pathCarSettings,
           element: <CarSettingsPage />,
