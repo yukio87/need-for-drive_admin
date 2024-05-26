@@ -7,7 +7,7 @@ import AuthService from '@/shared/api/AuthService'
 import { routesPaths } from '@/shared/consts/routesPaths'
 import { removeCookieValue } from '@/shared/lib/cookie'
 import { Loader } from '@/shared/ui/loader'
-import { setUserRoles } from '@/widgets/login/model/slice'
+import { setIsAuth } from '@/widgets/login'
 
 export const CarSettingsPage = () => {
   const navigate = useNavigate()
@@ -19,7 +19,7 @@ export const CarSettingsPage = () => {
       removeCookieValue('accessToken')
       removeCookieValue('refreshToken')
       removeCookieValue('basicToken')
-      dispatch(setUserRoles([]))
+      dispatch(setIsAuth(false))
       navigate(pathLogin)
     },
     onError: () => toast.error('Не удалось выйти из учетной записи...'),

@@ -1,0 +1,13 @@
+.styled-main {
+  padding: 28px;
+  background-color: rgb(246 248 250);
+
+  scrollbar-width: none;
+  overflow: scroll;
+
+  -ms-overflow-style: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}

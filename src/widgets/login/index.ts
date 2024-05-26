@@ -1,2 +1,2 @@
-export { authReducer, getIsAuthAdmin, setUserRoles } from './model/slice'
+export { authReducer, getIsAuth, setIsAuth } from './model/slice'
 export { Login } from './ui/Login'

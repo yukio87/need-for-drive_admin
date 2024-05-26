@@ -12,9 +12,8 @@ import { saveCookieValue } from '@/shared/lib/cookie'
 import { getIsValidEmail, getIsValidPassword } from '@/shared/lib/validate'
 import { Loader } from '@/shared/ui/loader'
 import { LoginForm } from '@/shared/ui/login-form'
-import { Role } from '@/types/type'
 
-import { setUserRoles } from '../model/slice'
+import { setIsAuth } from '../model/slice'
 import styles from './Login.module.scss'
 import { ErrorResponse, LoginData } from './type'
 
@@ -42,27 +41,27 @@ export const Login = () => {
         setBasicToken,
       ),
     onSuccess: (data: LoginData) => {
-      const roles: Role[] =
-        data.data.user_id === '1' ? ['admin', 'user'] : ['user'] // ? ролей нет, поэтому, если user_id === '1', то user - admin
-      const isAuthAdmin = roles.some((el) => el === 'admin')
-
       saveCookieValue('basicToken', basicToken)
       saveCookieValue('accessToken', data.data.access_token)
       saveCookieValue('refreshToken', data.data.refresh_token)
 
       $api.defaults.headers.common.Authorization = `Bearer ${data.data.access_token}`
 
-      dispatch(setUserRoles(roles))
-      navigate(isAuthAdmin ? pathCarSettings : pathHome)
+      dispatch(setIsAuth(true))
+      navigate('/')
     },
     onError: (err: AxiosError<ErrorResponse>) => {
       if (err.response.data.status === 401)
         toast.error('Пользователь не найден...')
       else toast.error('Повторите попытку позже...')
     },
+    onSettled: () => {
+      setEmailVal('')
+      setPasswordVal('')
+    },
   })
 
-  const { pathCarSettings, pathHome, pathRegistration } = routesPaths
+  const { pathRegistration } = routesPaths
 
   const handleEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmailVal(e.target.value)

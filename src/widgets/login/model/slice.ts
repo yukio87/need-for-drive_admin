@@ -1,25 +1,22 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
-import { Role, RootState } from '@/types/type'
+import { RootState } from '@/types/type'
 
-import { AuthState } from './type'
-
-const initialState: AuthState = {
-  userRoles: [],
+const initialState = {
+  isAuth: false,
 }
 
 const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
-    setUserRoles(state, { payload }: PayloadAction<Role[]>) {
-      state.userRoles = payload
+    setIsAuth(state, { payload }: PayloadAction<boolean>) {
+      state.isAuth = payload
     },
   },
 })
 
-export const { setUserRoles } = authSlice.actions
+export const { setIsAuth } = authSlice.actions
 export const authReducer = authSlice.reducer
 
-export const getIsAuthAdmin = (store: RootState) =>
-  store.auth.userRoles.some((el) => el === 'admin')
+export const getIsAuth = (store: RootState) => store.auth.isAuth
