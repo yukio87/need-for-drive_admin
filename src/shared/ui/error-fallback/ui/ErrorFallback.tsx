@@ -14,7 +14,7 @@ export const ErrorFallback: FC<ErrorFallbackProps> = ({
       <h6>Что-то пошло не так...</h6>
       <p>{error.message}</p>
       <button onClick={resetErrorBoundary} type="button">
-        Повторить
+        Назад
       </button>
     </div>
   )

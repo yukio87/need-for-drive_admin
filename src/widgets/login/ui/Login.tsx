@@ -1,10 +1,22 @@
+import { useMutation } from '@tanstack/react-query'
+import { AxiosError } from 'axios'
 import { useState } from 'react'
+import toast from 'react-hot-toast'
+import { useDispatch } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 
+import { $api } from '@/shared/api/api'
+import AuthService from '@/shared/api/AuthService/AuthService'
 import { routesPaths } from '@/shared/consts/routesPaths'
+import { saveCookieValue } from '@/shared/lib/cookie'
 import { getIsValidEmail, getIsValidPassword } from '@/shared/lib/validate'
+import { Loader } from '@/shared/ui/loader'
 import { LoginForm } from '@/shared/ui/login-form'
+import { StyledLoader } from '@/shared/ui/styled-loader'
 
+import { setIsAuth } from '../model/slice'
 import styles from './Login.module.scss'
+import { ErrorResponse, LoginData } from './type'
 
 const {
   'login-form-container': loginFormContainer,
@@ -17,6 +29,38 @@ const {
 export const Login = () => {
   const [emailVal, setEmailVal] = useState('')
   const [passwordVal, setPasswordVal] = useState('')
+  const [basicToken, setBasicToken] = useState('')
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+
+  const { isPending, mutate } = useMutation({
+    mutationFn: () =>
+      AuthService.login(
+        emailVal.toLowerCase().trim(),
+        passwordVal,
+        emailVal === 'intern',
+        setBasicToken,
+      ),
+    onSuccess: (data: LoginData) => {
+      saveCookieValue('basicToken', basicToken)
+      saveCookieValue('accessToken', data.data.access_token)
+      saveCookieValue('refreshToken', data.data.refresh_token)
+
+      $api.defaults.headers.common.Authorization = `Bearer ${data.data.access_token}`
+
+      dispatch(setIsAuth(true))
+      navigate('/')
+    },
+    onError: (err: AxiosError<ErrorResponse>) => {
+      if (err.response.data.status === 401)
+        toast.error('Пользователь не найден...')
+      else toast.error('Повторите попытку позже...')
+    },
+    onSettled: () => {
+      setEmailVal('')
+      setPasswordVal('')
+    },
+  })
 
   const { pathRegistration } = routesPaths
 
@@ -33,12 +77,15 @@ export const Login = () => {
     const isValidEmail = getIsValidEmail(emailVal)
     const isValidPassword = getIsValidPassword(passwordVal)
 
-    if (isValidEmail && isValidPassword) {
-      // console.log(`Почта ${emailVal.toLowerCase().trim()}`)
-      // console.log(`Пароль ${passwordVal}`)
-      // Написать функциональную часть из F-8
-    }
+    if (isValidEmail && isValidPassword) mutate()
   }
+
+  if (isPending)
+    return (
+      <StyledLoader>
+        <Loader size="60px" animation="grow" />
+      </StyledLoader>
+    )
 
   return (
     <LoginForm

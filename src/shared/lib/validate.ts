@@ -1,9 +1,8 @@
 import toast from 'react-hot-toast'
-import validator from 'validator'
 
 export const getIsValidEmail = (email: string) => {
-  if (!validator.isEmail(email)) {
-    toast.error('Некорректно заполнено поле "Почта"')
+  if (!email) {
+    toast.error('Заполните поле "Почта"')
     return false
   }
   if (email.length >= 150) {
@@ -14,11 +13,7 @@ export const getIsValidEmail = (email: string) => {
 }
 
 export const getIsValidPassword = (password: string) => {
-  if (/^\s+$/.test(password)) {
-    toast.error('Поле "Пароль" не может состоять только из пробелов')
-    return false
-  }
-  if (password.trim() === '') {
+  if (!password) {
     toast.error('Заполните поле "Пароль"')
     return false
   }

@@ -1,5 +1,9 @@
-// import { configureStore } from '@reduxjs/toolkit'
+import { configureStore } from '@reduxjs/toolkit'
 
-// export const store = configureStore({
-//   reducer: {},
-// })
+import { authReducer } from '@/widgets/login'
+
+export const store = configureStore({
+  reducer: {
+    auth: authReducer,
+  },
+})

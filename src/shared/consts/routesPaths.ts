@@ -1,7 +1,7 @@
 export const routesPaths = {
-  pathLogin: '/',
+  pathLogin: '/login',
   pathRegistration: '/registration',
+  pathOrderList: '/order-list',
   pathCarSettings: '/car-settings',
   pathTable: '/table',
-  pathOrderList: '/order-list',
 }

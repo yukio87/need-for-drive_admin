@@ -1,5 +1,5 @@
-export interface RequestOptions {
-  method: 'GET' | 'POST' | 'PUT' | 'DELETE'
-  params?: Record<string, unknown>
-  data?: Record<string, unknown>
+import { InternalAxiosRequestConfig } from 'axios'
+
+export interface CustomAxiosRequestConfig extends InternalAxiosRequestConfig {
+  _retry?: boolean
 }
