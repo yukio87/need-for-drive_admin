@@ -8,7 +8,7 @@ const { logo, text } = styles
 export const Logo = () => {
   return (
     <div className={logo}>
-      <Icon name="iconArrow" styles={iconBasicStyles} />
+      <Icon name="IconLogo" styles={iconBasicStyles} />
       <span className={text}>Need for drive</span>
     </div>
   )

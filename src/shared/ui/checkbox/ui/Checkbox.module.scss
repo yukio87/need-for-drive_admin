@@ -1,0 +1,53 @@
+.form-checkbox {
+  input[type='checkbox'] {
+    display: none;
+  }
+
+  label {
+    cursor: pointer;
+    user-select: none;
+
+    position: relative;
+
+    display: inline-block;
+
+    padding-left: 21.5px;
+
+    font-size: 10px;
+    line-height: 11.72px;
+    color: var(--c-black);
+  }
+
+  label::before {
+    content: '';
+
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+
+    display: inline-block;
+
+    width: 13px;
+    height: 13px;
+    margin: auto;
+
+    background: url('../assets/icons/rectangle-1.png') 0 0 no-repeat;
+  }
+
+  input[type='checkbox']:disabled + label::before {
+    background-image: url('../assets/icons/rectangle-3.png');
+  }
+
+  input[type='checkbox']:disabled + label {
+    cursor: not-allowed;
+  }
+
+  input[type='checkbox']:checked + label::before {
+    background-image: url('../assets/icons/check.png'),
+      url('../assets/icons/rectangle-2.png');
+    background-position:
+      50% 50%,
+      0 0;
+  }
+}

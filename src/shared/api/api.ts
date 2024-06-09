@@ -33,7 +33,7 @@ $api.interceptors.response.use(
         const response = await AuthService.refreshToken()
         saveCookieValue('accessToken', response.data.access_token)
         saveCookieValue('refreshToken', response.data.refresh_token)
-        $api.defaults.headers.common.Authorization = `Bearer ${response.data.access_token}`
+        originalRequest.headers.Authorization = `Bearer ${response.data.access_token}`
         return $api(originalRequest)
       } catch (refreshError) {
         toast.error('Что-то пошло не так...')

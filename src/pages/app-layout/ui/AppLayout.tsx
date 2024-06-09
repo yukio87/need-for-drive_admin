@@ -6,7 +6,9 @@ import { Footer } from '@/widgets/footer'
 import { Header } from '@/widgets/header'
 import { Sidebar } from '@/widgets/sidebar'
 
-import { StyledAppLayout, StyledMain } from './components'
+import styles from './AppLayout.module.scss'
+
+const { 'app-layout': appLayout, main } = styles
 
 export const AppLayout = () => {
   const navigate = useNavigate()
@@ -16,14 +18,14 @@ export const AppLayout = () => {
       FallbackComponent={ErrorFallback}
       onReset={() => navigate(-1)}
     >
-      <StyledAppLayout>
+      <div className={appLayout}>
         <Sidebar />
         <Header />
-        <StyledMain>
+        <main className={main}>
           <Outlet />
-        </StyledMain>
+        </main>
         <Footer />
-      </StyledAppLayout>
+      </div>
     </ErrorBoundary>
   )
 }

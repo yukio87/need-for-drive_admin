@@ -1,0 +1,42 @@
+.notifications-container {
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 69.5px;
+
+  border-left: 1px solid rgb(225 229 235 / 100%);
+
+  @media (max-width: 767px) {
+    width: 43px;
+  }
+}
+
+.icon-wrapper {
+  position: relative;
+}
+
+.circle {
+  position: absolute;
+  right: -8px;
+  bottom: -5px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 14px;
+  height: 14px;
+
+  background-color: rgb(196 24 60 / 100%);
+  border-radius: 100%;
+}
+
+.amount {
+  font-size: 9px;
+  font-weight: 600;
+  line-height: 13.5px;
+  color: rgb(255 255 255 / 100%);
+}

@@ -10,9 +10,8 @@ import {
   getIsValidEmail,
   getIsValidPassword,
 } from '@/shared/lib/validate'
-import { Loader } from '@/shared/ui/loader'
 import { LoginForm } from '@/shared/ui/login-form'
-import { StyledLoader } from '@/shared/ui/styled-loader'
+import { ModalLoader } from '@/shared/ui/modal-loader'
 
 import styles from './Registration.module.scss'
 
@@ -66,42 +65,38 @@ export const Registration = () => {
     if (isValidEmail && isValidPassword && IsValidConfPassword) mutate()
   }
 
-  if (isPending)
-    return (
-      <StyledLoader>
-        <Loader size="60px" animation="grow" />
-      </StyledLoader>
-    )
-
   return (
-    <LoginForm
-      data={{
-        emailVal,
-        passwordVal,
-        confPasswordVal,
-        handleEmail,
-        handlePassword,
-        handleConfPassword,
-      }}
-    >
-      <div className={loginFormContainer}>
-        <LoginForm.Logo />
-        <div className={content}>
-          <div className={title}>
-            <LoginForm.Title>Регистрация</LoginForm.Title>
-          </div>
-          <form className={form} onSubmit={handleSubmit} noValidate>
-            <LoginForm.InputEmail>Почта</LoginForm.InputEmail>
-            <LoginForm.InputPassword>Пароль</LoginForm.InputPassword>
-            <LoginForm.InputConfPassword>
-              Подтвердите пароль
-            </LoginForm.InputConfPassword>
-            <div className={buttons}>
-              <LoginForm.Button>Регистрация</LoginForm.Button>
+    <>
+      {isPending && <ModalLoader />}
+      <LoginForm
+        data={{
+          emailVal,
+          passwordVal,
+          confPasswordVal,
+          handleEmail,
+          handlePassword,
+          handleConfPassword,
+        }}
+      >
+        <div className={loginFormContainer}>
+          <LoginForm.Logo />
+          <div className={content}>
+            <div className={title}>
+              <LoginForm.Title>Регистрация</LoginForm.Title>
             </div>
-          </form>
+            <form className={form} onSubmit={handleSubmit} noValidate>
+              <LoginForm.InputEmail>Почта</LoginForm.InputEmail>
+              <LoginForm.InputPassword>Пароль</LoginForm.InputPassword>
+              <LoginForm.InputConfPassword>
+                Подтвердите пароль
+              </LoginForm.InputConfPassword>
+              <div className={buttons}>
+                <LoginForm.Button>Регистрация</LoginForm.Button>
+              </div>
+            </form>
+          </div>
         </div>
-      </div>
-    </LoginForm>
+      </LoginForm>
+    </>
   )
 }

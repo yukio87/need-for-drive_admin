@@ -1,3 +1,48 @@
 .sidebar {
+  position: relative;
+  z-index: 2;
+
+  display: grid;
   grid-row: span 3;
+  grid-template-rows: auto 1fr;
+
+  box-shadow: 1px 0 10px rgb(225 229 235 / 100%);
+}
+
+.logo-wrapper {
+  display: flex;
+  align-items: center;
+
+  height: 68.5px;
+  padding: 0 53.5px;
+
+  border-bottom: 1px solid rgb(225 229 235 / 100%);
+
+  @media (max-width: 1023px) {
+    justify-content: center;
+    height: 56px;
+    padding: 0;
+  }
+
+  @media (max-width: 767px) {
+    height: 44px;
+  }
+}
+
+.list {
+  scrollbar-width: none;
+
+  overflow: scroll;
+  display: flex;
+  flex-direction: column;
+
+  -ms-overflow-style: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  a {
+    text-decoration: none;
+  }
 }
