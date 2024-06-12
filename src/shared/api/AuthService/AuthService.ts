@@ -4,6 +4,8 @@ import toast from 'react-hot-toast'
 import { AuthResponse } from '@/types/type'
 
 import {
+  urlCar,
+  urlCity,
   urlLogin,
   urlLogout,
   urlOrder,
@@ -18,7 +20,13 @@ import {
 import { genRndHash } from '../../lib/generate'
 import { $api } from '../api'
 import { headers } from './consts/headers'
-import { ErrorResponse, OrdersResponse } from './type'
+import {
+  CarsResponse,
+  CitiesResponse,
+  ErrorResponse,
+  OrdersResponse,
+  RequestParams,
+} from './type'
 
 export default class AuthService {
   static async login(
@@ -95,8 +103,20 @@ export default class AuthService {
     )
   }
 
-  static async getOrders(): Promise<AxiosResponse<OrdersResponse>> {
+  static async getOrders(
+    params: RequestParams,
+  ): Promise<AxiosResponse<OrdersResponse>> {
     headers.Authorization = `Bearer ${getCookieValue('accessToken')}`
-    return $api.get(urlOrder, { headers })
+    return $api.get(urlOrder, { headers, params })
+  }
+
+  static async getCities(): Promise<AxiosResponse<CitiesResponse>> {
+    headers.Authorization = `Bearer ${getCookieValue('accessToken')}`
+    return $api.get(urlCity, { headers })
+  }
+
+  static async getCars(): Promise<AxiosResponse<CarsResponse>> {
+    headers.Authorization = `Bearer ${getCookieValue('accessToken')}`
+    return $api.get(urlCar, { headers })
   }
 }

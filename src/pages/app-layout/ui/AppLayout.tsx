@@ -1,5 +1,6 @@
+import { QueryErrorResetBoundary } from '@tanstack/react-query'
 import { ErrorBoundary } from 'react-error-boundary'
-import { Outlet, useNavigate } from 'react-router-dom'
+import { Outlet } from 'react-router-dom'
 
 import { ErrorFallback } from '@/shared/ui/error-fallback'
 import { Footer } from '@/widgets/footer'
@@ -11,21 +12,20 @@ import styles from './AppLayout.module.scss'
 const { 'app-layout': appLayout, main } = styles
 
 export const AppLayout = () => {
-  const navigate = useNavigate()
-
   return (
-    <ErrorBoundary
-      FallbackComponent={ErrorFallback}
-      onReset={() => navigate(-1)}
-    >
-      <div className={appLayout}>
-        <Sidebar />
-        <Header />
-        <main className={main}>
-          <Outlet />
-        </main>
-        <Footer />
-      </div>
-    </ErrorBoundary>
+    <QueryErrorResetBoundary>
+      {({ reset }) => (
+        <ErrorBoundary onReset={reset} FallbackComponent={ErrorFallback}>
+          <div className={appLayout}>
+            <Sidebar />
+            <Header />
+            <main className={main}>
+              <Outlet />
+            </main>
+            <Footer />
+          </div>
+        </ErrorBoundary>
+      )}
+    </QueryErrorResetBoundary>
   )
 }

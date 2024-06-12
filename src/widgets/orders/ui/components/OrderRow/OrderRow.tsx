@@ -4,8 +4,8 @@ import { formatDate, getNumberWithSpaces } from '@/shared/lib/format'
 import { Checkbox } from '@/shared/ui/checkbox'
 import { Order } from '@/types/type'
 
-import { ButtonGroup } from '../../ButtonGroup/ButtonGroup'
-import { labelsList } from '../consts/lists'
+import { ButtonGroup } from '../ButtonGroup/ButtonGroup'
+import { labelsList } from './consts/lists'
 import styles from './OrderRow.module.scss'
 import { OrderRowProps } from './type'
 
@@ -43,16 +43,13 @@ export const OrderRow: FC<OrderRowProps> = ({ order }) => {
         </p>
       </div>
       <div className={checkboxes}>
-        {labelsList.map((item) => {
-          const isChecked = order[item.id as keyof Order] === true
-          return (
-            <Checkbox
-              defaultChecked={isChecked}
-              label={item.label}
-              key={item.id}
-            />
-          )
-        })}
+        {labelsList.map((item) => (
+          <Checkbox
+            defaultChecked={!!order[item.id as keyof Order]}
+            label={item.label}
+            key={item.id}
+          />
+        ))}
       </div>
       <p className={priceStyles}>{`${getNumberWithSpaces(price)} ₽`}</p>
       <div className={buttonGroup}>

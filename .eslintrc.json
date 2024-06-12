@@ -47,6 +47,7 @@
     "react/function-component-definition": [
       "error",
       { "namedComponents": "arrow-function" }
-    ]
+    ],
+    "no-plusplus": "off"
   }
 }
