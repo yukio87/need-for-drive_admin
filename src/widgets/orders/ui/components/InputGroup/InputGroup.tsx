@@ -7,7 +7,11 @@ import { Icon } from '@/shared/ui/icon'
 import { Loader } from '@/shared/ui/loader'
 
 import { iconStyles } from '../../../consts/styles'
-import { getFilteredBy, setSelectedPoint } from '../../../model/slice'
+import {
+  getFilteredBy,
+  setSelectedPoint,
+} from '../../../model/filterSlice/filterSlice'
+import { SelectedCar, SelectedCity } from '../../type'
 import styles from './InputGroup.module.scss'
 
 const { 'input-group': inputGroup, 'icon-wrapper': iconWrapper } = styles
@@ -30,7 +34,7 @@ export const InputGroup = () => {
     throwOnError: true,
   })
 
-  const handleChangeCar = (s: string[]) =>
+  const handleChangeCar = (s: SelectedCar[]) =>
     dispatch(
       setSelectedPoint({
         pointName: 'selectedCar',
@@ -38,7 +42,7 @@ export const InputGroup = () => {
       }),
     )
 
-  const handleChangeCity = (s: string[]) =>
+  const handleChangeCity = (s: SelectedCity[]) =>
     dispatch(
       setSelectedPoint({
         pointName: 'selectedCity',

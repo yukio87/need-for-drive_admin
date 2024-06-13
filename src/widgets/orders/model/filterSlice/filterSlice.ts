@@ -2,6 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 import { RootState } from '@/types/type'
 
+import { SelectedCar, SelectedCity } from '../../ui/type'
 import { InitialState, Payload } from './type'
 
 const initialState: InitialState = {
@@ -15,7 +16,11 @@ const filtersSlice = createSlice({
   reducers: {
     setSelectedPoint(state, { payload }: PayloadAction<Payload>) {
       const { pointName, selected } = payload
-      state[pointName as keyof InitialState] = selected
+
+      if (pointName === 'selectedCar')
+        state.selectedCar = selected as SelectedCar[]
+      else if (pointName === 'selectedCity')
+        state.selectedCity = selected as SelectedCity[]
     },
     clearInputs() {
       return initialState

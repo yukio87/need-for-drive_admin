@@ -1,7 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit'
 
 import { notificationReducer } from '@/features/notifications'
-import { filterReducer } from '@/widgets/orders'
+import { filterReducer, paramsReducer } from '@/widgets/orders'
 
 import { appReducer } from './slice'
 
@@ -10,5 +10,6 @@ export const store = configureStore({
     app: appReducer,
     notifications: notificationReducer,
     filters: filterReducer,
+    params: paramsReducer,
   },
 })

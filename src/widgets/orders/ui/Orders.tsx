@@ -1,11 +1,12 @@
 import { useQuery } from '@tanstack/react-query'
-import { useState } from 'react'
+import { useSelector } from 'react-redux'
 
 import AuthService from '@/shared/api/AuthService/AuthService'
 import { PER_PAGE } from '@/shared/consts/perPage'
 import { Loader } from '@/shared/ui/loader'
 import { Pagination } from '@/widgets/pagination'
 
+import { getParams, setParams } from '../model/paramsSlice/paramsSlice'
 import { FilterButtonGroup, InputGroup, OrderRow } from './components'
 import styles from './Orders.module.scss'
 
@@ -18,15 +19,10 @@ const {
 } = styles
 
 export const Orders = () => {
-  const [activePage, setActivePage] = useState(1)
-
-  const params = {
-    limit: String(PER_PAGE),
-    page: String(activePage),
-  }
+  const params = useSelector(getParams)
 
   const { isLoading, data } = useQuery({
-    queryKey: ['orders', activePage],
+    queryKey: ['orders', params],
     queryFn: () => AuthService.getOrders(params),
     throwOnError: true,
     staleTime: 10000,
@@ -55,8 +51,8 @@ export const Orders = () => {
         <footer className={footer}>
           <Pagination
             pagesAmount={pagesAmount}
-            activePage={activePage}
-            setActivePage={setActivePage}
+            params={params}
+            actionCreator={setParams}
           />
         </footer>
       </div>
