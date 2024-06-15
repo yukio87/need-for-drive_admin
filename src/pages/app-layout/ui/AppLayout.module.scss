@@ -1,0 +1,42 @@
+.app-layout {
+  display: grid;
+  grid-template-columns: 285px 1fr;
+  grid-template-rows: auto 1fr auto;
+  height: 100vh;
+
+  @media (max-width: 1439px) {
+    grid-template-columns: 240px 1fr;
+  }
+
+  @media (max-width: 1023px) {
+    grid-template-columns: 56px 1fr;
+  }
+
+  @media (max-width: 767px) {
+    grid-template-columns: 44px 1fr;
+  }
+}
+
+.main {
+  scrollbar-width: none;
+
+  overflow: scroll;
+
+  padding: 28px;
+
+  background-color: rgb(246 248 250);
+
+  -ms-overflow-style: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  @media (max-width: 1225px) {
+    padding: 20px;
+  }
+
+  @media (max-width: 767px) {
+    padding: 14px;
+  }
+}

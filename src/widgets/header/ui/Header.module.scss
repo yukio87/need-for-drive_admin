@@ -1,3 +1,9 @@
 .header {
-  display: block;
+  position: relative;
+  z-index: 1;
+
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+
+  box-shadow: 5px 1px 10px rgb(225 229 235 / 100%);
 }

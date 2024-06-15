@@ -1,7 +1,9 @@
 .form-input {
+  position: relative;
+
   display: flex;
   flex-direction: column;
-  gap: 8.5px;
+  gap: 4.5px;
 
   font-family: Helvetica, sans-serif;
   font-weight: 400;
@@ -13,23 +15,64 @@
     letter-spacing: -0.18px;
   }
 
-  input {
+  .small {
+    width: 100%;
     padding: 8px 11px;
 
     font-size: 11px;
     line-height: 12.65px;
+    color: var(--c-black);
     letter-spacing: -0.19px;
 
-    border: 1px solid rgb(190 202 214 / 100%);
+    border: 1px solid var(--c-grey);
     border-radius: 4px;
 
+    &:focus {
+      outline: none;
+    }
+  }
+
+  .big {
+    width: 100%;
+    padding: 26px 50px;
+
+    font-size: 13px;
+    line-height: 14.95px;
+    color: var(--c-black);
+    letter-spacing: -0.09px;
+
+    border: none;
+
     &::placeholder {
-      color: rgb(190 202 214 / 100%);
+      color: rgb(118 127 157 / 100%);
     }
 
     &:focus {
-      border-color: var(--c-blue);
       outline: none;
     }
+
+    @media (max-width: 1023px) {
+      padding: 20px 50px;
+    }
+
+    @media (max-width: 767px) {
+      padding: 14px 28px;
+    }
+  }
+}
+
+.icon-wrapper {
+  position: absolute;
+  top: 25px;
+  left: 28px;
+
+  @media (max-width: 1023px) {
+    top: 19px;
+    left: 28px;
+  }
+
+  @media (max-width: 767px) {
+    top: 13px;
+    left: 8px;
   }
 }

@@ -68,6 +68,9 @@
     "webpack-dev-server": "^4.15.1"
   },
   "dependencies": {
+    "@emotion/react": "^11.11.4",
+    "@emotion/styled": "^11.11.5",
+    "@mui/material": "^5.15.19",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.5.11",
     "@reduxjs/toolkit": "^2.0.1",
     "@tanstack/react-query": "^5.24.1",
@@ -80,9 +83,11 @@
     "html-webpack-plugin": "^5.6.0",
     "js-cookie": "^3.0.5",
     "mini-css-extract-plugin": "^2.7.6",
+    "moment": "^2.30.1",
     "normalize.css": "^8.0.1",
     "react": "^18.2.0",
     "react-bootstrap": "^2.9.2",
+    "react-bootstrap-typeahead": "^6.3.2",
     "react-dom": "^18.2.0",
     "react-error-boundary": "^4.0.13",
     "react-hot-toast": "^2.4.1",
