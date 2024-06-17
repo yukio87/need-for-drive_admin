@@ -115,8 +115,10 @@ export default class AuthService {
     return $api.get(urlCity, { headers })
   }
 
-  static async getCars(): Promise<AxiosResponse<CarsResponse>> {
+  static async getCars(
+    params: RequestParams,
+  ): Promise<AxiosResponse<CarsResponse>> {
     headers.Authorization = `Bearer ${getCookieValue('accessToken')}`
-    return $api.get(urlCar, { headers })
+    return $api.get(urlCar, { headers, params })
   }
 }

@@ -1,10 +1,10 @@
 @import '@/app/styles/sass/abstracts/_mixins';
 
-.order-row {
+.car-row {
   cursor: default;
 
   display: grid;
-  grid-template-columns: 1fr 2fr 0.85fr 0.75fr 1fr;
+  grid-template-columns: 1fr 1.25fr 0.85fr 0.75fr 1fr;
   gap: 4px;
   align-items: center;
 
@@ -13,20 +13,16 @@
   color: rgb(136 144 152 / 100%);
   letter-spacing: -0.41px;
 
-  input[type='checkbox'] + label {
-    cursor: default !important;
-  }
-
   @media (max-width: 1439px) {
     gap: 8px;
   }
 
   @media (max-width: 1225px) {
-    grid-template-columns: 1fr 2fr 0.85fr 0.75fr 0.5fr;
+    grid-template-columns: 1fr 1.25fr 0.85fr 0.75fr 0.5fr;
   }
 
   @media (max-width: 1023px) {
-    grid-template-columns: 2fr 0.85fr 0.75fr 0.5fr;
+    grid-template-columns: 1fr 1.25fr 0.85fr 0.75fr 0.5fr;
   }
 
   @media (max-width: 767px) {
@@ -53,41 +49,27 @@
   width: 138px;
   height: 63px;
   object-fit: cover;
-
-  @media (max-width: 1023px) {
-    display: none;
-  }
 }
 
-.order-info {
+.car-info {
   @include table-info();
 }
 
-.model-styles,
-.city,
-.color-styles {
+.car-styles,
+.category,
+.colors-styles,
+.price {
   color: var(--c-black);
 }
 
-.checkboxes {
+.colors-container,
+.price-container {
   display: flex;
   flex-direction: column;
-  gap: 7px;
+  gap: 5px;
 
   @media (max-width: 767px) {
-    gap: 4px;
-  }
-}
-
-.price-styles {
-  font-family: Helvetica, sans-serif;
-  font-size: 24px;
-  line-height: 27.6px;
-  color: var(--c-black);
-  letter-spacing: -0.75px;
-
-  @media (max-width: 767px) {
-    font-size: 18px;
+    text-align: center;
   }
 }
 

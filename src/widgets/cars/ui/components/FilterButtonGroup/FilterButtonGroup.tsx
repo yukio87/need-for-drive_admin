@@ -1,40 +1,46 @@
+import { FC } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { Button } from '@/shared/ui/button'
 
-import {
-  clearSelected,
-  getIsFiltered,
-  getSelected,
-} from '../../../model/filterSlice/filterSlice'
 import { clearParams, setParams } from '../../../model/paramsSlice/paramsSlice'
+import {
+  clearSort,
+  getIsSorted,
+  getSortedBy,
+} from '../../../model/sortSlice/sortSlice'
 import styles from './FilterButtonGroup.module.scss'
+import { FilterButtonGroupProps } from './type'
 
 const { 'filter-button-group': filterButtonGroup } = styles
 
-export const FilterButtonGroup = () => {
-  const isFiltered = useSelector(getIsFiltered)
-  const { selectedCarId, selectedCityId } = useSelector(getSelected)
+export const FilterButtonGroup: FC<FilterButtonGroupProps> = ({
+  setSelectedSortedBy,
+}) => {
+  const isSorted = useSelector(getIsSorted)
+  const sortedBy = useSelector(getSortedBy)
   const dispatch = useDispatch()
+
+  const [key, value] = Object.entries(sortedBy)[0]
 
   const handleApply = () => {
     dispatch(
       setParams({
         page: '0',
-        carId: selectedCarId,
-        cityId: selectedCityId,
+        [key]: value,
       }),
     )
   }
 
   const handleReset = () => {
     dispatch(clearParams())
-    dispatch(clearSelected())
+    dispatch(clearSort())
+    setSelectedSortedBy('')
   }
 
   return (
     <div className={filterButtonGroup}>
-      {isFiltered && (
+      {isSorted && (
         <Button onClick={handleReset} variations="danger">
           Отменить
         </Button>

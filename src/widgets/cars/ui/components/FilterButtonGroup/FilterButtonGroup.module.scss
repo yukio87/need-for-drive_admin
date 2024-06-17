@@ -1,10 +1,9 @@
 .filter-button-group {
   display: flex;
-  gap: 15px;
+  gap: 10px;
 
   @media (max-width: 767px) {
     flex-direction: column;
     gap: 8px;
-    width: max-content;
   }
 }
