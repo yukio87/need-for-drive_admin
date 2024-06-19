@@ -7,7 +7,8 @@ import { CARS_PER_PAGE } from '@/shared/consts/perPage'
 import { Loader } from '@/shared/ui/loader'
 import { Pagination } from '@/shared/ui/pagination'
 
-import { getCarsParams, setParams } from '../model/paramsSlice/paramsSlice'
+import { setParams } from '../model/paramsSlice/paramsSlice'
+import { selectAllParams } from '../model/selectors/selectors'
 import styles from './Cars.module.scss'
 import { CarRow, Dropdown, FilterButtonGroup } from './components'
 
@@ -15,7 +16,7 @@ const { title, 'cars-container': carsContainer, header, main, footer } = styles
 
 export const Cars = () => {
   const [selectedSortedBy, setSelectedSortedBy] = useState('')
-  const params = useSelector(getCarsParams)
+  const params = useSelector(selectAllParams)
 
   const { isLoading, data } = useQuery({
     queryKey: ['cars', params],

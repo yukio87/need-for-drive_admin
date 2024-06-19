@@ -1,8 +1,8 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
-import { RootState } from '@/types/type'
+import { CarsSortPayload, RootState } from '@/types/type'
 
-import { InitialState, Payload } from './type'
+import { InitialState } from './type'
 
 const initialState: InitialState = {
   'sort[name]': '',
@@ -12,7 +12,7 @@ const sortSlice = createSlice({
   name: 'cars/sort',
   initialState,
   reducers: {
-    setSort(state, { payload }: PayloadAction<Payload>) {
+    setSort(state, { payload }: PayloadAction<CarsSortPayload>) {
       const { pointName, value } = payload
 
       return {

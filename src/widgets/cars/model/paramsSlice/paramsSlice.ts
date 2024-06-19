@@ -15,24 +15,10 @@ const paramsSlice = createSlice({
   initialState,
   reducers: {
     setParams(state, { payload }: PayloadAction<Payload>) {
-      const stateSort = Object.keys(state).reduce((acc, key) => {
-        if (!key.startsWith('sort')) acc[key] = state[key]
-        return acc
-      }, {} as InitialState)
-
-      const isSorting = Object.keys(payload).some((item) =>
-        item.startsWith('sort'),
-      )
-
-      return isSorting
-        ? {
-            ...stateSort,
-            ...payload,
-          }
-        : {
-            ...state,
-            ...payload,
-          }
+      return {
+        ...state,
+        ...payload,
+      }
     },
     clearParams() {
       return initialState
@@ -43,4 +29,4 @@ const paramsSlice = createSlice({
 export const { setParams, clearParams } = paramsSlice.actions
 export const carsParamsReducer = paramsSlice.reducer
 
-export const getCarsParams = (store: RootState) => store.carsParams
+export const getParams = (store: RootState) => store.carsParams

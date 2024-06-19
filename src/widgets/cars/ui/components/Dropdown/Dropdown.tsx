@@ -2,10 +2,12 @@ import { FC } from 'react'
 import DropdownB from 'react-bootstrap/Dropdown'
 import { useDispatch } from 'react-redux'
 
+import { CarsSortPayload } from '@/types/type'
+
 import { setSort } from '../../../model/sortSlice/sortSlice'
 import { dropdownItemList } from './consts/dropdownItemList'
 import styles from './Dropdown.module.scss'
-import { DropdownProps } from './type'
+import { DropdownItem, DropdownProps } from './type'
 
 const { dropdown } = styles
 
@@ -17,15 +19,13 @@ export const Dropdown: FC<DropdownProps> = ({
 
   const handleSelect = (eventKey: string) => setSelectedSortedBy(eventKey)
 
-  const sortHandlers = {
-    handleIncreaseBrand: () =>
-      dispatch(setSort({ pointName: 'name', value: '-1' })),
-    handleDecreaseBrand: () =>
-      dispatch(setSort({ pointName: 'name', value: '1' })),
-    handleIncreasePrice: () =>
-      dispatch(setSort({ pointName: 'priceMin', value: '-1' })),
-    handleDecreasePrice: () =>
-      dispatch(setSort({ pointName: 'priceMin', value: '1' })),
+  const handleClick = (item: DropdownItem) => {
+    dispatch(
+      setSort({
+        pointName: item.name as CarsSortPayload['pointName'],
+        value: item.value as CarsSortPayload['value'],
+      }),
+    )
   }
 
   return (
@@ -37,13 +37,11 @@ export const Dropdown: FC<DropdownProps> = ({
       <DropdownB.Menu>
         {dropdownItemList.map((item) => (
           <DropdownB.Item
-            key={item.eventKey}
-            eventKey={item.eventKey}
-            onClick={
-              sortHandlers[item.onClickHandler as keyof typeof sortHandlers]
-            }
+            key={item.label}
+            eventKey={item.label}
+            onClick={() => handleClick(item)}
           >
-            {item.eventKey}
+            {item.label}
           </DropdownB.Item>
         ))}
       </DropdownB.Menu>

@@ -3,7 +3,6 @@ import { FC } from 'react'
 import { getNumberWithSpaces } from '@/shared/lib/format'
 import { ButtonGroup } from '@/shared/ui/button-group'
 
-import { ColorsItem } from '../ColorsItem/ColorsItem'
 import styles from './CarRow.module.scss'
 import { CarRowProps } from './type'
 
@@ -48,9 +47,9 @@ export const CarRow: FC<CarRowProps> = ({ car }) => {
       <div className={colorsContainer}>
         <span>Цвет:</span>
         <div className={colorsStyles}>
-          {colors.map((item, index, array) => (
-            <ColorsItem item={item} index={index} array={array} key={item} />
-          ))}
+          {colors
+            .map((item, i) => (i === 0 ? item : item.toLowerCase()))
+            .join(', ')}
         </div>
       </div>
       <div className={priceContainer}>

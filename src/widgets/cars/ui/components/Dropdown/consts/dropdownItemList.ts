@@ -1,18 +1,22 @@
 export const dropdownItemList = [
   {
-    eventKey: 'По производителю A -> Z',
-    onClickHandler: 'handleIncreaseBrand',
+    label: 'По производителю A -> Z',
+    name: 'name',
+    value: '-1',
   },
   {
-    eventKey: 'По производителю Z -> A',
-    onClickHandler: 'handleDecreaseBrand',
+    label: 'По производителю Z -> A',
+    name: 'name',
+    value: '1',
   },
   {
-    eventKey: 'По возрастанию мин. цены',
-    onClickHandler: 'handleIncreasePrice',
+    label: 'По возрастанию мин. цены',
+    name: 'priceMin',
+    value: '-1',
   },
   {
-    eventKey: 'По убыванию мин. цены',
-    onClickHandler: 'handleDecreasePrice',
+    label: 'По убыванию мин. цены',
+    name: 'priceMin',
+    value: '1',
   },
 ]

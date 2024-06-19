@@ -98,3 +98,14 @@ interface CategoryId {
   name: string
   updatedAt: string
 }
+
+export interface OrdersParams {
+  page: string
+  carId: string
+  cityId: string
+}
+
+export interface CarsSortPayload {
+  pointName: 'name' | 'priceMin'
+  value: '1' | '-1'
+}

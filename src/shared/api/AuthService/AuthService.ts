@@ -1,7 +1,7 @@
 import { AxiosError, AxiosResponse } from 'axios'
 import toast from 'react-hot-toast'
 
-import { AuthResponse } from '@/types/type'
+import { AuthResponse, OrdersParams } from '@/types/type'
 
 import {
   urlCar,
@@ -104,7 +104,7 @@ export default class AuthService {
   }
 
   static async getOrders(
-    params: RequestParams,
+    params: OrdersParams,
   ): Promise<AxiosResponse<OrdersResponse>> {
     headers.Authorization = `Bearer ${getCookieValue('accessToken')}`
     return $api.get(urlOrder, { headers, params })

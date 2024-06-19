@@ -3,12 +3,8 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import { Button } from '@/shared/ui/button'
 
-import { clearParams, setParams } from '../../../model/paramsSlice/paramsSlice'
-import {
-  clearSort,
-  getIsSorted,
-  getSortedBy,
-} from '../../../model/sortSlice/sortSlice'
+import { clearParams } from '../../../model/paramsSlice/paramsSlice'
+import { clearSort, getIsSorted } from '../../../model/sortSlice/sortSlice'
 import styles from './FilterButtonGroup.module.scss'
 import { FilterButtonGroupProps } from './type'
 
@@ -18,19 +14,9 @@ export const FilterButtonGroup: FC<FilterButtonGroupProps> = ({
   setSelectedSortedBy,
 }) => {
   const isSorted = useSelector(getIsSorted)
-  const sortedBy = useSelector(getSortedBy)
   const dispatch = useDispatch()
 
-  const [key, value] = Object.entries(sortedBy)[0]
-
-  const handleApply = () => {
-    dispatch(
-      setParams({
-        page: '0',
-        [key]: value,
-      }),
-    )
-  }
+  const handleApply = () => {}
 
   const handleReset = () => {
     dispatch(clearParams())

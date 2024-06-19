@@ -30,6 +30,7 @@ export interface ErrorResponse {
   status: number
 }
 
+// ?
 export interface RequestParams {
   [key: string]: string
 }
