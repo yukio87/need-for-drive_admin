@@ -30,7 +30,7 @@ export interface ErrorResponse {
   status: number
 }
 
-// ?
-export interface RequestParams {
-  [key: string]: string
+export interface CarsParams {
+  limit: string
+  page: string
 }

@@ -12,6 +12,7 @@ import {
   setSelectedPoint,
 } from '../../../model/filterSlice/filterSlice'
 import { SelectedCar, SelectedCity } from '../../type'
+import { carsParams } from './consts/carsParams'
 import styles from './InputGroup.module.scss'
 
 const { 'typehead-group': typeheadGroup, 'icon-wrapper': iconWrapper } = styles
@@ -22,7 +23,7 @@ export const InputGroup = () => {
 
   const { isLoading: isLoadingCars, data: cars } = useQuery({
     queryKey: ['cars'],
-    queryFn: () => AuthService.getCars({}),
+    queryFn: () => AuthService.getCars(carsParams),
     select: (res) => res.data.data,
     throwOnError: true,
   })

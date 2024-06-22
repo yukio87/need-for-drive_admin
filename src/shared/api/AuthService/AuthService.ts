@@ -21,11 +21,11 @@ import { genRndHash } from '../../lib/generate'
 import { $api } from '../api'
 import { headers } from './consts/headers'
 import {
+  CarsParams,
   CarsResponse,
   CitiesResponse,
   ErrorResponse,
   OrdersResponse,
-  RequestParams,
 } from './type'
 
 export default class AuthService {
@@ -116,7 +116,7 @@ export default class AuthService {
   }
 
   static async getCars(
-    params: RequestParams,
+    params: CarsParams,
   ): Promise<AxiosResponse<CarsResponse>> {
     headers.Authorization = `Bearer ${getCookieValue('accessToken')}`
     return $api.get(urlCar, { headers, params })
