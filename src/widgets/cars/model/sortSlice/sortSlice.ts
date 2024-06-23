@@ -2,9 +2,9 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 import { CarsSortPayload, RootState } from '@/types/type'
 
-import { InitialState } from './type'
+import { SortParams } from '../type'
 
-const initialState: InitialState = {
+const initialState: SortParams = {
   'sort[name]': '',
 }
 

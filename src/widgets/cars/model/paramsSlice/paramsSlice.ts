@@ -8,6 +8,9 @@ import { InitialState, Payload } from './type'
 const initialState: InitialState = {
   limit: String(CARS_PER_PAGE),
   page: '0',
+  sortParams: {
+    'sort[name]': '',
+  },
 }
 
 const paramsSlice = createSlice({
