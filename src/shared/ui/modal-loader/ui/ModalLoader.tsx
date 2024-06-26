@@ -7,7 +7,7 @@ const { 'modal-loader': modalLoader } = styles
 export const ModalLoader = () => {
   return (
     <div className={modalLoader}>
-      <Loader size="60px" animation="grow" />
+      <Loader size="45px" animation="grow" />
     </div>
   )
 }

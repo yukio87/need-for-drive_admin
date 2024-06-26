@@ -1,0 +1,17 @@
+.input-group {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 320px);
+  gap: 28px 21px;
+  align-content: start;
+
+  @media (max-width: 767px) {
+    grid-template-columns: 1fr;
+    row-gap: 22px;
+  }
+}
+
+.input-container {
+  display: flex;
+  flex-direction: column;
+  gap: 4.5px;
+}

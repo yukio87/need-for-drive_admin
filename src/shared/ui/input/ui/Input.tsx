@@ -1,37 +1,36 @@
 import { FC } from 'react'
 
-import { Icon } from '../../icon'
-import { iconStyles } from '../consts/styles'
 import styles from './Input.module.scss'
 import { InputProps } from './type'
 
-const { 'form-input': formInput, 'icon-wrapper': iconWrapper } = styles
+const { 'form-input': formInput, label, input, 'input-err': inputErr } = styles
 
 export const Input: FC<InputProps> = ({
-  size = 'small',
-  hasLabel = false,
+  width = '100%',
   children,
   id,
   placeholder,
   value,
   onChange,
+  defaultValue,
+  register,
+  registerOptions,
+  isError = false,
 }) => {
   return (
-    <div className={formInput}>
-      {hasLabel && <label htmlFor={id}>{children}</label>}
-      {size === 'big' && (
-        <div className={iconWrapper}>
-          <Icon name="IconSearch" styles={iconStyles} />
-        </div>
-      )}
-
+    <div className={formInput} style={{ width }}>
+      <label className={label} htmlFor={id}>
+        {children}
+      </label>
       <input
-        className={styles[size]}
+        className={`${isError ? inputErr : input}`}
         type="text"
         id={id}
         placeholder={placeholder}
         value={value}
+        defaultValue={defaultValue}
         onChange={onChange}
+        {...(register && id ? register(id, registerOptions) : {})}
       />
     </div>
   )

@@ -5,6 +5,7 @@ import { AuthResponse, OrdersParams } from '@/types/type'
 
 import {
   urlCar,
+  urlCategory,
   urlCity,
   urlLogin,
   urlLogout,
@@ -21,8 +22,10 @@ import { genRndHash } from '../../lib/generate'
 import { $api } from '../api'
 import { headers } from './consts/headers'
 import {
+  CarResponse,
   CarsParams,
   CarsResponse,
+  CategoriesResponse,
   CitiesResponse,
   ErrorResponse,
   OrdersResponse,
@@ -120,5 +123,15 @@ export default class AuthService {
   ): Promise<AxiosResponse<CarsResponse>> {
     headers.Authorization = `Bearer ${getCookieValue('accessToken')}`
     return $api.get(urlCar, { headers, params })
+  }
+
+  static async getCar(id: string): Promise<AxiosResponse<CarResponse>> {
+    headers.Authorization = `Bearer ${getCookieValue('accessToken')}`
+    return $api.get(`${urlCar}/${id}`, { headers })
+  }
+
+  static async getCategories(): Promise<AxiosResponse<CategoriesResponse>> {
+    headers.Authorization = `Bearer ${getCookieValue('accessToken')}`
+    return $api.get(urlCategory, { headers })
   }
 }

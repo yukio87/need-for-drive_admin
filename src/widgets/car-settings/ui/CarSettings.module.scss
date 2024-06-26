@@ -1,0 +1,24 @@
+.car-settings {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  row-gap: 38px;
+
+  min-height: 100%;
+  padding: 18px;
+
+  background-color: #fff;
+  border-radius: 9px;
+  box-shadow: 3px 3px 10px rgb(225 229 235 / 100%);
+}
+
+.header {
+  font-size: 17.5px;
+  font-weight: 500;
+  line-height: 20.51px;
+  color: var(--c-text-primary);
+  letter-spacing: -0.44px;
+
+  @media (max-width: 767px) {
+    justify-self: center;
+  }
+}

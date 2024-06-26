@@ -1,5 +1,7 @@
 import { FC } from 'react'
+import { useNavigate } from 'react-router-dom'
 
+import { routesPaths } from '@/shared/consts/routesPaths'
 import { getNumberWithSpaces } from '@/shared/lib/format'
 import { ButtonGroup } from '@/shared/ui/button-group'
 
@@ -20,6 +22,9 @@ const {
 } = styles
 
 export const CarRow: FC<CarRowProps> = ({ car }) => {
+  const navigate = useNavigate()
+
+  const { pathCarCard } = routesPaths
   const { categoryId, colors, name, thumbnail, priceMin, priceMax } = car
 
   const handleClickCheck = () => {
@@ -30,9 +35,7 @@ export const CarRow: FC<CarRowProps> = ({ car }) => {
     // console.log(`click reject on car with id ${car.id}`)
   }
 
-  const handleClickEdit = () => {
-    // console.log(`click edit on car with id ${car.id}`)
-  }
+  const handleClickEdit = () => navigate(`${pathCarCard}/${car.id}`)
 
   return (
     <div className={carRow}>

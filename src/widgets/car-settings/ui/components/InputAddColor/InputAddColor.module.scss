@@ -1,0 +1,97 @@
+.input-add-color {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.form-input {
+  display: flex;
+  flex-direction: column;
+  gap: 4.5px;
+
+  font-family: Helvetica, sans-serif;
+  font-weight: 400;
+}
+
+.label {
+  font-size: 10.5px;
+  line-height: 12.07px;
+  color: rgb(73 80 87 / 100%);
+  letter-spacing: -0.18px;
+}
+
+.input-container {
+  display: flex;
+  gap: 8px;
+}
+
+.input {
+  flex-grow: 1;
+
+  padding: 8px 11px;
+
+  font-size: 11px;
+  line-height: 12.65px;
+  color: var(--c-black);
+  letter-spacing: -0.19px;
+
+  border: 1px solid var(--c-grey);
+  border-radius: 4px;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.btn {
+  cursor: pointer;
+
+  position: relative;
+
+  width: 30px;
+  height: 30px;
+  padding: 0;
+
+  background-color: #fff;
+  border: 1px solid var(--c-grey);
+  border-radius: 4px;
+
+  &:disabled {
+    cursor: not-allowed;
+  }
+}
+
+.btn::before,
+.btn::after {
+  content: '';
+  position: absolute;
+  background-color: var(--c-grey);
+}
+
+.btn::before {
+  top: 50%;
+  right: 6px;
+  left: 6px;
+  transform: translateY(-50%);
+
+  height: 2px;
+}
+
+.btn::after {
+  top: 6px;
+  bottom: 6px;
+  left: 50%;
+  transform: translateX(-50%);
+
+  width: 2px;
+}
+
+.checkboxes {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  label {
+    cursor: default !important;
+  }
+}

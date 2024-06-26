@@ -48,6 +48,7 @@
       "error",
       { "namedComponents": "arrow-function" }
     ],
-    "no-plusplus": "off"
+    "react/button-has-type": "off",
+    "@typescript-eslint/no-misused-promises": "off"
   }
 }

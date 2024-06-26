@@ -7,6 +7,14 @@ interface City {
   updatedAt: string
 }
 
+interface Category {
+  createdAt: string
+  description: string
+  id: number
+  name: string
+  updatedAt: string
+}
+
 export interface Headers {
   [key: string]: string
 }
@@ -24,6 +32,15 @@ export interface CitiesResponse {
 export interface CarsResponse {
   count: number
   data: Car[]
+}
+
+export interface CategoriesResponse {
+  count: number
+  data: Category[]
+}
+
+export interface CarResponse {
+  data: Car
 }
 
 export interface ErrorResponse {
