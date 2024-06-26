@@ -1,7 +1,6 @@
 export interface InitialState {
-  [key: string]: string
-}
-
-export interface Payload {
-  [key: string]: string
+  limit: string
+  page: string
+  carId: string
+  cityId: string
 }

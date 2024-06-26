@@ -5,17 +5,17 @@ import { Navigate } from 'react-router-dom'
 
 import AuthService from '@/shared/api/AuthService/AuthService'
 import { routesPaths } from '@/shared/consts/routesPaths'
-import { getParams } from '@/widgets/orders'
+import { getOrdersParams } from '@/widgets/orders'
 
 import { ModalLoader } from '../../modal-loader'
 import { ProtectedRouteProps } from './type'
 
 export const ProtectedRoute: FC<ProtectedRouteProps> = ({ children }) => {
-  const params = useSelector(getParams)
+  const ordersParams = useSelector(getOrdersParams)
 
   const { isLoading, isError } = useQuery({
-    queryKey: ['orders', params],
-    queryFn: () => AuthService.getOrders(params),
+    queryKey: ['orders', ordersParams],
+    queryFn: () => AuthService.getOrders(ordersParams),
   })
 
   const { pathLogin } = routesPaths

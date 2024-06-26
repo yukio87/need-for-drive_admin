@@ -8,6 +8,8 @@ import { InitialState, Payload } from './type'
 const initialState: InitialState = {
   selectedCar: [],
   selectedCity: [],
+  selectedCarId: '',
+  selectedCityId: '',
 }
 
 const filtersSlice = createSlice({
@@ -17,21 +19,23 @@ const filtersSlice = createSlice({
     setSelectedPoint(state, { payload }: PayloadAction<Payload>) {
       const { pointName, selected } = payload
 
-      if (pointName === 'selectedCar')
+      if (pointName === 'selectedCar') {
         state.selectedCar = selected as SelectedCar[]
-      else if (pointName === 'selectedCity')
+        state.selectedCarId = selected[0] ? String(selected[0]?.id) : ''
+      } else if (pointName === 'selectedCity') {
         state.selectedCity = selected as SelectedCity[]
+        state.selectedCityId = selected[0] ? String(selected[0]?.id) : ''
+      }
     },
-    clearInputs() {
+    clearSelected() {
       return initialState
     },
   },
 })
 
-export const { setSelectedPoint, clearInputs } = filtersSlice.actions
-export const filterReducer = filtersSlice.reducer
+export const { setSelectedPoint, clearSelected } = filtersSlice.actions
+export const ordersFiltersReducer = filtersSlice.reducer
 
-export const getFilteredBy = (store: RootState) => store.filters
-export const getIsFiltered = (store: RootState) => {
-  return !!Object.values(store.filters).flat(Infinity).length
-}
+export const getSelected = (store: RootState) => store.ordersFilters
+export const getIsFiltered = (store: RootState) =>
+  !!store.ordersFilters.selectedCarId || !!store.ordersFilters.selectedCityId

@@ -3,10 +3,7 @@ import { ActionCreatorWithOptionalPayload } from '@reduxjs/toolkit'
 export interface PaginationProps {
   pagesAmount: number
   params: {
-    [key: string]: string
+    page: string
   }
-  actionCreator: ActionCreatorWithOptionalPayload<
-    { [key: string]: string },
-    string
-  >
+  actionCreator: ActionCreatorWithOptionalPayload<{ page: string }, string>
 }

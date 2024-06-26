@@ -1,7 +1,7 @@
 import { AxiosError, AxiosResponse } from 'axios'
 import toast from 'react-hot-toast'
 
-import { AuthResponse } from '@/types/type'
+import { AuthResponse, OrdersParams } from '@/types/type'
 
 import {
   urlCar,
@@ -21,11 +21,11 @@ import { genRndHash } from '../../lib/generate'
 import { $api } from '../api'
 import { headers } from './consts/headers'
 import {
+  CarsParams,
   CarsResponse,
   CitiesResponse,
   ErrorResponse,
   OrdersResponse,
-  RequestParams,
 } from './type'
 
 export default class AuthService {
@@ -104,7 +104,7 @@ export default class AuthService {
   }
 
   static async getOrders(
-    params: RequestParams,
+    params: OrdersParams,
   ): Promise<AxiosResponse<OrdersResponse>> {
     headers.Authorization = `Bearer ${getCookieValue('accessToken')}`
     return $api.get(urlOrder, { headers, params })
@@ -115,8 +115,10 @@ export default class AuthService {
     return $api.get(urlCity, { headers })
   }
 
-  static async getCars(): Promise<AxiosResponse<CarsResponse>> {
+  static async getCars(
+    params: CarsParams,
+  ): Promise<AxiosResponse<CarsResponse>> {
     headers.Authorization = `Bearer ${getCookieValue('accessToken')}`
-    return $api.get(urlCar, { headers })
+    return $api.get(urlCar, { headers, params })
   }
 }

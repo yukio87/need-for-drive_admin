@@ -1,37 +1,9 @@
-import { Order } from '@/types/type'
+import { Car, Order } from '@/types/type'
 
 interface City {
   createdAt: string
   id: number
   name: string
-  updatedAt: string
-}
-
-interface CategoryId {
-  createdAt: string
-  description: string
-  id: number
-  name: string
-  updatedAt: string
-}
-
-interface Thumbnail {
-  path: string
-  size: number
-}
-
-interface Car {
-  categoryId: CategoryId
-  colors: string[]
-  createdAt: string
-  description: string
-  id: number
-  name: string
-  number: string
-  priceMax: number
-  priceMin: number
-  tank: string
-  thumbnail: Thumbnail
   updatedAt: string
 }
 
@@ -58,6 +30,7 @@ export interface ErrorResponse {
   status: number
 }
 
-export interface RequestParams {
-  [key: string]: string
+export interface CarsParams {
+  limit: string
+  page: string
 }

@@ -1,0 +1,21 @@
+@import '@/app/styles/sass/abstracts/_mixins';
+
+.title {
+  @include table-title();
+}
+
+.cars-container {
+  @include table-container();
+}
+
+.header {
+  @include table-header();
+}
+
+.main {
+  @include table-main();
+}
+
+.footer {
+  @include table-footer();
+}

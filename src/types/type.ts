@@ -75,3 +75,37 @@ interface RateId {
   rateType_id: number
   updatedAt: string
 }
+
+export interface Car {
+  categoryId: CategoryId
+  colors: string[]
+  createdAt: string
+  description: string
+  id: number
+  name: string
+  number: string
+  priceMax: number
+  priceMin: number
+  tank: string
+  thumbnail: Thumbnail
+  updatedAt: string
+}
+
+interface CategoryId {
+  createdAt: string
+  description: string
+  id: number
+  name: string
+  updatedAt: string
+}
+
+export interface OrdersParams {
+  page: string
+  carId: string
+  cityId: string
+}
+
+export interface CarsSortPayload {
+  pointName: 'name' | 'priceMin'
+  value: '1' | '-1'
+}

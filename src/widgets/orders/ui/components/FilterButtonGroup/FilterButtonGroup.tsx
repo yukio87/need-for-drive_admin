@@ -3,10 +3,10 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Button } from '@/shared/ui/button'
 
 import {
-  clearInputs,
+  clearSelected,
   getIsFiltered,
+  getSelected,
 } from '../../../model/filterSlice/filterSlice'
-import { getSelectedStringId } from '../../../model/filterSlice/selectors'
 import { clearParams, setParams } from '../../../model/paramsSlice/paramsSlice'
 import styles from './FilterButtonGroup.module.scss'
 
@@ -14,7 +14,7 @@ const { 'filter-button-group': filterButtonGroup } = styles
 
 export const FilterButtonGroup = () => {
   const isFiltered = useSelector(getIsFiltered)
-  const { selectedCarId, selectedCityId } = useSelector(getSelectedStringId)
+  const { selectedCarId, selectedCityId } = useSelector(getSelected)
   const dispatch = useDispatch()
 
   const handleApply = () => {
@@ -29,7 +29,7 @@ export const FilterButtonGroup = () => {
 
   const handleReset = () => {
     dispatch(clearParams())
-    dispatch(clearInputs())
+    dispatch(clearSelected())
   }
 
   return (

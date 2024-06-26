@@ -1,20 +1,22 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
-import { PER_PAGE } from '@/shared/consts/perPage'
-import { RootState } from '@/types/type'
+import { ORDERS_PER_PAGE } from '@/shared/consts/perPage'
+import { OrdersParams, RootState } from '@/types/type'
 
-import { InitialState, Payload } from './type'
+import { InitialState } from './type'
 
 const initialState: InitialState = {
-  limit: String(PER_PAGE),
+  limit: String(ORDERS_PER_PAGE),
   page: '0',
+  carId: '',
+  cityId: '',
 }
 
 const paramsSlice = createSlice({
-  name: 'params',
+  name: 'ordersParams',
   initialState,
   reducers: {
-    setParams(state, { payload }: PayloadAction<Payload>) {
+    setParams(state, { payload }: PayloadAction<OrdersParams>) {
       return {
         ...state,
         ...payload,
@@ -27,6 +29,6 @@ const paramsSlice = createSlice({
 })
 
 export const { setParams, clearParams } = paramsSlice.actions
-export const paramsReducer = paramsSlice.reducer
+export const ordersParamsReducer = paramsSlice.reducer
 
-export const getParams = (store: RootState) => store.params
+export const getOrdersParams = (store: RootState) => store.ordersParams
