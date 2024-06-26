@@ -1,0 +1,16 @@
+.car-preview {
+  width: 334.5px;
+  height: max-content;
+  background-color: #fff;
+  border-radius: 9px;
+  box-shadow: 3px 3px 10px rgb(225 229 235 / 100%);
+  cursor: default;
+
+  @media (max-width: 807px) {
+    width: 295px;
+  }
+
+  @media (max-width: 767px) {
+    width: 100%;
+  }
+}

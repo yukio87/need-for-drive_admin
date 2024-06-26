@@ -1,0 +1,47 @@
+.input-container {
+  position: relative;
+}
+
+.input {
+  width: 100%;
+  padding: 26px 50px;
+
+  font-size: 13px;
+  line-height: 14.95px;
+  color: var(--c-black);
+  letter-spacing: -0.09px;
+
+  border: none;
+
+  &::placeholder {
+    color: rgb(118 127 157 / 100%);
+  }
+
+  &:focus {
+    outline: none;
+  }
+
+  @media (max-width: 1023px) {
+    padding: 20px 50px;
+  }
+
+  @media (max-width: 767px) {
+    padding: 14px 28px;
+  }
+}
+
+.icon-wrapper {
+  position: absolute;
+  top: 25px;
+  left: 28px;
+
+  @media (max-width: 1023px) {
+    top: 19px;
+    left: 28px;
+  }
+
+  @media (max-width: 767px) {
+    top: 13px;
+    left: 8px;
+  }
+}

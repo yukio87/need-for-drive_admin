@@ -109,3 +109,7 @@ export interface CarsSortPayload {
   pointName: 'name' | 'priceMin'
   value: '1' | '-1'
 }
+
+export interface CarCardInputs {
+  [key: string]: string
+}
