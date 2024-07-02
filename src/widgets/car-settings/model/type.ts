@@ -1,11 +1,10 @@
+import { CategoryId } from '@/types/type'
+
 export interface InitialState {
-  colors: string[]
-  modelIsValid: boolean
-  categoryIsValid: boolean
-  colorIsValid: boolean
+  colorsObj: {
+    [key: string]: boolean
+  }
+  categoryId: CategoryId
 }
 
-export interface Payload {
-  pointName: 'modelIsValid' | 'categoryIsValid' | 'colorIsValid'
-  value: boolean
-}
+export type categoryIdPayload = CategoryId

@@ -1,7 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit'
 
 import { notificationReducer } from '@/features/notifications'
-import { CarPreviewReducer } from '@/widgets/car-preview'
+import { carCardIdReducer } from '@/pages/car-card-id-page'
 import { carSettingsReducer } from '@/widgets/car-settings'
 import { carsParamsReducer, carsSortReducer } from '@/widgets/cars'
 import { ordersFiltersReducer, ordersParamsReducer } from '@/widgets/orders'
@@ -17,6 +17,6 @@ export const store = configureStore({
     carsSort: carsSortReducer,
     carsParams: carsParamsReducer,
     carSettings: carSettingsReducer,
-    CarPreview: CarPreviewReducer,
+    carCardId: carCardIdReducer,
   },
 })

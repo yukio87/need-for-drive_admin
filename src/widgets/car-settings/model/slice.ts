@@ -2,42 +2,61 @@ import { createSelector, createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 import { RootState } from '@/types/type'
 
-import { InitialState, Payload } from './type'
+import { categoryIdPayload, InitialState } from './type'
 
 const initialState: InitialState = {
-  colors: [],
-  modelIsValid: true,
-  categoryIsValid: true,
-  colorIsValid: true,
+  colorsObj: {},
+  categoryId: {
+    createdAt: '',
+    description: '',
+    id: 0,
+    name: '',
+    updatedAt: '',
+  },
 }
 
 const carSettingsSlice = createSlice({
   name: 'carSettings',
   initialState,
   reducers: {
-    setColors(state, { payload }: PayloadAction<string[]>) {
-      state.colors = payload
+    setInitColors(state, { payload }: PayloadAction<string[]>) {
+      state.colorsObj = payload.reduce(
+        (acc, item) => ({ ...acc, [item]: true }),
+        {},
+      )
     },
-    setColor(state, { payload }: PayloadAction<string>) {
-      state.colors.unshift(payload)
+    addColor(state, { payload }: PayloadAction<string>) {
+      state.colorsObj = {
+        ...state.colorsObj,
+        [payload]: true,
+      }
     },
-    setIsValid(state, { payload }: PayloadAction<Payload>) {
-      const { pointName, value } = payload
-      state[pointName] = value
+    setIsCheckedColor(state, { payload }: PayloadAction<string>) {
+      const curVal = state.colorsObj[payload]
+
+      state.colorsObj = {
+        ...state.colorsObj,
+        [payload]: !curVal,
+      }
+    },
+    setCategoryId(state, { payload }: PayloadAction<categoryIdPayload>) {
+      state.categoryId = payload
     },
   },
 })
 
-export const { setColors, setColor, setIsValid } = carSettingsSlice.actions
+export const { setInitColors, addColor, setIsCheckedColor, setCategoryId } =
+  carSettingsSlice.actions
 export const carSettingsReducer = carSettingsSlice.reducer
 
-export const selectCarSettingsIsValid = createSelector(
-  [(store: RootState) => store.carSettings],
-  (a) => ({
-    modelIsValid: a.modelIsValid,
-    categoryIsValid: a.categoryIsValid,
-    colorIsValid: a.colorIsValid,
-  }),
-)
+export const getColorsObj = (store: RootState) => store.carSettings.colorsObj
+export const getCategoryId = (store: RootState) => store.carSettings.categoryId
 
-export const getColors = (store: RootState) => store.carSettings.colors
+export const selectCheckedColors = createSelector(
+  [(store: RootState) => store.carSettings.colorsObj],
+  (a) =>
+    Object.entries(a).reduce((acc: string[], [color, isChecked]) => {
+      if (isChecked) acc.push(color)
+      return acc
+    }, []),
+)

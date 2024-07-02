@@ -1,13 +1,10 @@
-import { FC, useEffect } from 'react'
+import { FC, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
-import { InputErrMsg } from '@/entities/input-err-msg'
-import { useInputValidation } from '@/shared/lib/hooks/useInputValidation'
 import { Checkbox } from '@/shared/ui/checkbox'
 
-import { getColors, setColor, setIsValid } from '../../../model/slice'
+import { addColor, getColorsObj, setIsCheckedColor } from '../../../model/slice'
 import styles from './InputAddColor.module.scss'
-import { requiredValidation } from './lib/requiredValidation'
 import { InputAddColorProps } from './type'
 
 const {
@@ -21,21 +18,23 @@ const {
 } = styles
 
 export const InputAddColor: FC<InputAddColorProps> = ({ children, id }) => {
-  const colors = useSelector(getColors)
+  const [inputVal, setInputVal] = useState('')
+  const colorsObj = useSelector(getColorsObj)
   const dispatch = useDispatch()
 
-  const { value, error, handleChange, setValue } = useInputValidation(
-    '',
-    requiredValidation,
-  )
-
-  useEffect(() => {
-    dispatch(setIsValid({ pointName: 'colorIsValid', value: !error }))
-  }, [dispatch, error])
+  const amountChecked = Object.values(colorsObj).filter((item) => item).length
 
   const handleClick = () => {
-    dispatch(setColor(value))
-    setValue('')
+    dispatch(addColor(inputVal))
+    setInputVal('')
+  }
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setInputVal(e.target.value)
+  }
+
+  const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch(setIsCheckedColor(e.target.id))
   }
 
   return (
@@ -49,25 +48,35 @@ export const InputAddColor: FC<InputAddColorProps> = ({ children, id }) => {
             className={input}
             type="text"
             id={id}
-            value={value}
-            onChange={handleChange}
+            value={inputVal}
+            onChange={handleInputChange}
+            maxLength={30}
           />
           <button
-            disabled={!!error || !value}
+            disabled={!inputVal}
             className={btn}
             onClick={handleClick}
             type="button"
             aria-label="Добавить цвет"
           />
         </div>
-        {error && <InputErrMsg errMsg={error} />}
       </div>
       <div className={checkboxes}>
-        {colors.map((item) => (
-          <span key={item}>
-            <Checkbox label={item} defaultChecked={true} />
-          </span>
-        ))}
+        {Object.entries(colorsObj).map(([color, isChecked]) => {
+          const isDisabled = amountChecked === 1 && isChecked
+
+          return (
+            <span key={color}>
+              <Checkbox
+                id={color}
+                label={color}
+                checked={isChecked}
+                onChange={handleCheckboxChange}
+                disabled={isDisabled}
+              />
+            </span>
+          )
+        })}
       </div>
     </div>
   )

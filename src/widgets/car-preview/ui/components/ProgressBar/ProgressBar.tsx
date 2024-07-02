@@ -1,22 +1,25 @@
+import { FC } from 'react'
 import ProgressBarB from 'react-bootstrap/ProgressBar'
-import { useSelector } from 'react-redux'
-
-import { selectValidPercentage } from '@/widgets/car-settings'
 
 import styles from './ProgressBar.module.scss'
+import { ProgressBarProps } from './type'
 
 const { 'progress-bar': progressBar, text } = styles
 
-export const ProgressBar = () => {
-  const validPercentage = useSelector(selectValidPercentage)
+export const ProgressBar: FC<ProgressBarProps> = ({ getValues, errors }) => {
+  const amountAllFields = Object.keys(getValues()).length
+  const amountInvalidFields = Object.keys(errors).length
+  const percentageValidFields = Math.abs(
+    Math.ceil((amountInvalidFields / amountAllFields - 1) * 100),
+  )
 
   return (
     <div className={progressBar}>
       <div className={text}>
         <span>Заполнено</span>
-        <span>{validPercentage}%</span>
+        <span>{percentageValidFields}%</span>
       </div>
-      <ProgressBarB now={validPercentage} />
+      <ProgressBarB now={percentageValidFields} />
     </div>
   )
 }

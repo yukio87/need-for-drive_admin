@@ -1,14 +1,16 @@
 import { useQuery } from '@tanstack/react-query'
 import { createContext } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
+import { useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 
 import AuthService from '@/shared/api/AuthService/AuthService'
 import { Loader } from '@/shared/ui/loader'
 import { CarCardInputs } from '@/types/type'
 import { CarPreview } from '@/widgets/car-preview'
-import { CarSettings } from '@/widgets/car-settings'
+import { CarSettings, selectCheckedColors } from '@/widgets/car-settings'
 
+import { selectDefaultInputsVal } from '../model/slice'
 import styles from './CarCardPage.module.scss'
 import { FormContextType } from './type'
 
@@ -18,6 +20,10 @@ export const FormContext = createContext<FormContextType>(null)
 
 export const CarCardIdPage = () => {
   const { carId } = useParams()
+  const defaultInputsVal = useSelector(selectDefaultInputsVal)
+  // Временно
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const colors = useSelector(selectCheckedColors)
 
   const { isLoading, data: car } = useQuery({
     queryKey: ['car', carId],
@@ -27,10 +33,12 @@ export const CarCardIdPage = () => {
   })
 
   const methods = useForm<CarCardInputs>({
-    mode: 'onChange',
+    mode: 'onSubmit',
+    defaultValues: defaultInputsVal,
   })
 
   const onSubmit: SubmitHandler<CarCardInputs> = (data) => {
+    // Временно
     // eslint-disable-next-line no-console
     console.log(data)
   }

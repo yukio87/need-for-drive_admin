@@ -1,6 +1,8 @@
 import { FC } from 'react'
+import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
+import { setDefaultInputsVal } from '@/pages/car-card-id-page'
 import { routesPaths } from '@/shared/consts/routesPaths'
 import { getNumberWithSpaces } from '@/shared/lib/format'
 import { ButtonGroup } from '@/shared/ui/button-group'
@@ -23,6 +25,7 @@ const {
 
 export const CarRow: FC<CarRowProps> = ({ car }) => {
   const navigate = useNavigate()
+  const dispatch = useDispatch()
 
   const { pathCarCard } = routesPaths
   const { categoryId, colors, name, thumbnail, priceMin, priceMax } = car
@@ -35,7 +38,17 @@ export const CarRow: FC<CarRowProps> = ({ car }) => {
     // console.log(`click reject on car with id ${car.id}`)
   }
 
-  const handleClickEdit = () => navigate(`${pathCarCard}/${car.id}`)
+  const handleClickEdit = () => {
+    dispatch(
+      setDefaultInputsVal({
+        description: car.description,
+        name: car.name,
+        categoryId: car.categoryId,
+        thumbnail: car.thumbnail,
+      }),
+    )
+    navigate(`${pathCarCard}/${car.id}`)
+  }
 
   return (
     <div className={carRow}>

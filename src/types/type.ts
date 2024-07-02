@@ -40,7 +40,7 @@ interface carId {
   updatedAt: string
 }
 
-interface Thumbnail {
+export interface Thumbnail {
   path: string
   size: number
 }
@@ -91,7 +91,7 @@ export interface Car {
   updatedAt: string
 }
 
-interface CategoryId {
+export interface CategoryId {
   createdAt: string
   description: string
   id: number
@@ -111,5 +111,8 @@ export interface CarsSortPayload {
 }
 
 export interface CarCardInputs {
-  [key: string]: string
+  description: string
+  name: string
+  categoryId: CategoryId
+  thumbnail: FileList
 }

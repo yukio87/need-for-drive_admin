@@ -1,6 +1,7 @@
-import { FC, useContext } from 'react'
+import { FC, useState } from 'react'
+import { useSelector } from 'react-redux'
 
-import { FormContext } from '@/pages/car-card-id-page'
+import { selectDefaultInputsVal } from '@/pages/car-card-id-page/model/slice'
 import { FileInput } from '@/shared/ui/file-input'
 
 import styles from './ImageSelect.module.scss'
@@ -14,10 +15,20 @@ const {
   'car-category': carCategory,
 } = styles
 
-export const ImageSelect: FC<ImageSelectProps> = ({ car }) => {
-  const { register } = useContext(FormContext)
+export const ImageSelect: FC<ImageSelectProps> = ({
+  car,
+  register,
+  errors,
+}) => {
+  const { thumbnail: defaultFileList } = useSelector(selectDefaultInputsVal)
+  const [selectedFile, setSelectedFile] = useState<File | undefined>(
+    defaultFileList[0],
+  )
 
   const { thumbnail, name, categoryId } = car
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) =>
+    setSelectedFile(e.target.files[0])
 
   return (
     <div className={imageSelect}>
@@ -26,7 +37,15 @@ export const ImageSelect: FC<ImageSelectProps> = ({ car }) => {
         <span className={carName}>{name}</span>
         <span className={carCategory}>{categoryId.name}</span>
       </div>
-      <FileInput register={register} keyName="thumbnail" />
+      <FileInput
+        {...register('thumbnail', {
+          onChange: handleChange,
+          validate: (v) => v.length > 0 || 'Выберите файл',
+        })}
+        selectedFile={selectedFile}
+        isError={!!errors.thumbnail}
+        accept="image/jpeg, image/png, image/gif, image/bmp"
+      />
     </div>
   )
 }
