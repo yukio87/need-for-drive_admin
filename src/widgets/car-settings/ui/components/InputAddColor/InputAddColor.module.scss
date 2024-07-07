@@ -1,3 +1,37 @@
+@mixin input-styles {
+  flex-grow: 1;
+
+  padding: 8px 11px;
+
+  font-size: 11px;
+  line-height: 12.65px;
+  color: var(--c-black);
+  letter-spacing: -0.19px;
+
+  border-radius: 4px;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+@mixin btn-styles {
+  cursor: pointer;
+
+  position: relative;
+
+  width: 30px;
+  height: 30px;
+  padding: 0;
+
+  background-color: #fff;
+  border-radius: 4px;
+
+  &:disabled {
+    cursor: not-allowed;
+  }
+}
+
 .input-add-color {
   display: flex;
   flex-direction: column;
@@ -26,49 +60,42 @@
 }
 
 .input {
-  flex-grow: 1;
-
-  padding: 8px 11px;
-
-  font-size: 11px;
-  line-height: 12.65px;
-  color: var(--c-black);
-  letter-spacing: -0.19px;
+  @include input-styles();
 
   border: 1px solid var(--c-grey);
-  border-radius: 4px;
+}
 
-  &:focus {
-    outline: none;
-  }
+.input-err {
+  @include input-styles();
+
+  border: 1px solid rgb(196 24 60 / 100%);
+  box-shadow: 0 0 3px 1px rgb(196 24 60 / 10%);
 }
 
 .btn {
-  cursor: pointer;
+  @include btn-styles();
 
-  position: relative;
-
-  width: 30px;
-  height: 30px;
-  padding: 0;
-
-  background-color: #fff;
   border: 1px solid var(--c-grey);
-  border-radius: 4px;
+}
 
-  &:disabled {
-    cursor: not-allowed;
-  }
+.btn-err {
+  @include btn-styles();
+
+  border: 1px solid rgb(196 24 60 / 100%);
+  box-shadow: 0 0 3px 1px rgb(196 24 60 / 10%);
 }
 
 .btn::before,
-.btn::after {
+.btn::after,
+.btn-err::before,
+.btn-err::after {
   content: '';
   position: absolute;
   background-color: var(--c-grey);
 }
 
-.btn::before {
+.btn::before,
+.btn-err::before {
   top: 50%;
   right: 6px;
   left: 6px;
@@ -77,7 +104,8 @@
   height: 2px;
 }
 
-.btn::after {
+.btn::after,
+.btn-err::after {
   top: 6px;
   bottom: 6px;
   left: 50%;

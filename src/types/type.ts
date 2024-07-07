@@ -111,8 +111,36 @@ export interface CarsSortPayload {
 }
 
 export interface CarCardInputs {
+  categoryId: CategoryId
+  colors: string[]
   description: string
   name: string
-  categoryId: CategoryId
+  priceMax: number
+  priceMin: number
   thumbnail: FileList
+}
+
+export interface CarRequestBody {
+  priceMax: number
+  priceMin: number
+  name: string
+  thumbnail: Thumbnail
+  description: string
+  categoryId: CategoryId
+  colors: string[]
+}
+
+export interface MutateCarResponse {
+  data: {
+    categoryId: CategoryId
+    colors: string[]
+    createdAt: string
+    description: string
+    id: number
+    name: string
+    priceMax: number
+    priceMin: number
+    tank: null | string
+    thumbnail: Thumbnail
+  }
 }

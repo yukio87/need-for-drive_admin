@@ -1,29 +1,33 @@
+import { FC } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import { Button } from '@/shared/ui/button'
 
 import styles from './ButtonGroup.module.scss'
+import { ButtonGroupProps } from './type'
 
 const { 'button-group': buttonGroup } = styles
 
-export const ButtonGroup = () => {
+export const ButtonGroup: FC<ButtonGroupProps> = ({
+  isEditSession,
+  deleteCar,
+}) => {
   const navigate = useNavigate()
 
   const handleReset = () => navigate(-1)
-
-  const handleDelete = () => {
-    // console.log('click on delete button')
-  }
+  const handleDelete = () => deleteCar()
 
   return (
     <div className={buttonGroup}>
-      <Button type="submit">Сохранить</Button>
+      <Button type="submit">{isEditSession ? 'Сохранить' : 'Создать'}</Button>
       <Button onClick={handleReset} variations="secondary">
         Отменить
       </Button>
-      <Button onClick={handleDelete} variations="danger">
-        Удалить
-      </Button>
+      {isEditSession && (
+        <Button onClick={handleDelete} variations="danger">
+          Удалить
+        </Button>
+      )}
     </div>
   )
 }

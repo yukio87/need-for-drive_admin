@@ -2,7 +2,6 @@ import { useQuery } from '@tanstack/react-query'
 import { FC } from 'react'
 import { Typeahead } from 'react-bootstrap-typeahead'
 import { Controller } from 'react-hook-form'
-import { useDispatch } from 'react-redux'
 
 import { InputErrMsg } from '@/entities/input-err-msg'
 import AuthService from '@/shared/api/AuthService/AuthService'
@@ -11,7 +10,6 @@ import { Input } from '@/shared/ui/input'
 import { Loader } from '@/shared/ui/loader'
 import { CategoryId } from '@/types/type'
 
-import { setCategoryId } from '../../../model/slice'
 import { InputAddColor } from '../InputAddColor/InputAddColor'
 import { iconStyles } from './consts/style'
 import styles from './InputGroup.module.scss'
@@ -28,22 +26,18 @@ const {
 
 export const InputGroup: FC<InputGroupProps> = ({
   car,
+  isEditSession,
   register,
   control,
   errors,
+  clearErrors,
 }) => {
-  const dispatch = useDispatch()
-
   const { isLoading: isLoadingCategories, data: categories } = useQuery({
     queryKey: ['categories'],
     queryFn: () => AuthService.getCategories(),
     select: (data) => data.data.data,
     throwOnError: true,
   })
-
-  const handleChangeCategory = (s: CategoryId[]) => {
-    dispatch(setCategoryId(s[0]))
-  }
 
   return (
     <div className={inputGroup}>
@@ -74,10 +68,7 @@ export const InputGroup: FC<InputGroupProps> = ({
               {...field}
               className={errors.categoryId ? typeheadErr : typehead}
               id="categoryId"
-              onChange={(s: CategoryId[]) => {
-                field.onChange(s)
-                handleChangeCategory(s)
-              }}
+              onChange={(s: CategoryId[]) => field.onChange(s[0])}
               options={categories || []}
               labelKey="name"
               emptyLabel={
@@ -87,7 +78,7 @@ export const InputGroup: FC<InputGroupProps> = ({
                   'Совпадений не найдено'
                 )
               }
-              defaultSelected={[car.categoryId]}
+              defaultSelected={isEditSession ? [car.categoryId] : []}
               inputProps={{ maxLength: 150 }}
             >
               <div className={iconWrapper}>
@@ -100,7 +91,46 @@ export const InputGroup: FC<InputGroupProps> = ({
           </div>
         )}
       />
-      <InputAddColor id="input-add-color">Доступные цвета</InputAddColor>
+
+      <div className={inputContainer}>
+        <Input
+          id="priceMin"
+          isError={!!errors.priceMin}
+          type="number"
+          {...register('priceMin', {
+            required: 'Поле обязательно к заполнению',
+            min: { value: 0, message: 'Некорректное значение' },
+          })}
+        >
+          Минимальная цена
+        </Input>
+        {errors.priceMin && <InputErrMsg errMsg={errors.priceMin.message} />}
+      </div>
+
+      <div className={inputContainer}>
+        <Input
+          id="priceMax"
+          isError={!!errors.priceMax}
+          type="number"
+          {...register('priceMax', {
+            required: 'Поле обязательно к заполнению',
+            min: { value: 0, message: 'Некорректное значение' },
+          })}
+        >
+          Максимальная цена
+        </Input>
+        {errors.priceMax && <InputErrMsg errMsg={errors.priceMax.message} />}
+      </div>
+
+      <InputAddColor
+        id="input-add-color"
+        isEditSession={isEditSession}
+        register={register}
+        errors={errors}
+        clearErrors={clearErrors}
+      >
+        Доступные цвета
+      </InputAddColor>
     </div>
   )
 }

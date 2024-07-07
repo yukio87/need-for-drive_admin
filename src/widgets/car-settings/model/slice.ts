@@ -1,18 +1,11 @@
-import { createSelector, createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 import { RootState } from '@/types/type'
 
-import { categoryIdPayload, InitialState } from './type'
+import { InitialState } from './type'
 
 const initialState: InitialState = {
   colorsObj: {},
-  categoryId: {
-    createdAt: '',
-    description: '',
-    id: 0,
-    name: '',
-    updatedAt: '',
-  },
 }
 
 const carSettingsSlice = createSlice({
@@ -26,9 +19,12 @@ const carSettingsSlice = createSlice({
       )
     },
     addColor(state, { payload }: PayloadAction<string>) {
+      const correctedColor =
+        payload[0].toUpperCase() + payload.slice(1).toLowerCase()
+
       state.colorsObj = {
         ...state.colorsObj,
-        [payload]: true,
+        [correctedColor]: true,
       }
     },
     setIsCheckedColor(state, { payload }: PayloadAction<string>) {
@@ -39,24 +35,14 @@ const carSettingsSlice = createSlice({
         [payload]: !curVal,
       }
     },
-    setCategoryId(state, { payload }: PayloadAction<categoryIdPayload>) {
-      state.categoryId = payload
+    resetColors(state) {
+      state.colorsObj = {}
     },
   },
 })
 
-export const { setInitColors, addColor, setIsCheckedColor, setCategoryId } =
+export const { setInitColors, addColor, setIsCheckedColor, resetColors } =
   carSettingsSlice.actions
 export const carSettingsReducer = carSettingsSlice.reducer
 
 export const getColorsObj = (store: RootState) => store.carSettings.colorsObj
-export const getCategoryId = (store: RootState) => store.carSettings.categoryId
-
-export const selectCheckedColors = createSelector(
-  [(store: RootState) => store.carSettings.colorsObj],
-  (a) =>
-    Object.entries(a).reduce((acc: string[], [color, isChecked]) => {
-      if (isChecked) acc.push(color)
-      return acc
-    }, []),
-)

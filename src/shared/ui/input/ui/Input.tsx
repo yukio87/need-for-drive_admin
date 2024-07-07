@@ -16,7 +16,7 @@ export const Input = forwardRef(
         </label>
         <input
           className={`${isError ? inputErr : input}`}
-          type="text"
+          id={id}
           ref={ref}
           {...rest}
         />

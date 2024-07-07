@@ -36,3 +36,19 @@
   color: rgb(129 142 163 / 100%);
   letter-spacing: -0.31px;
 }
+
+.label {
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 15.23px;
+  color: rgb(134 142 150 / 100%);
+  letter-spacing: -0.41px;
+}
+
+.file-input-wrapper {
+  width: 231.5px;
+
+  @media (max-width: 348px) {
+    width: 200px;
+  }
+}

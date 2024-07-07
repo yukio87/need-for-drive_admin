@@ -1,9 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit'
 
 import { notificationReducer } from '@/features/notifications'
-import { carCardIdReducer } from '@/pages/car-card-id-page'
 import { carSettingsReducer } from '@/widgets/car-settings'
 import { carsParamsReducer, carsSortReducer } from '@/widgets/cars'
+import { createEditCarReducer } from '@/widgets/create-edit-car'
 import { ordersFiltersReducer, ordersParamsReducer } from '@/widgets/orders'
 
 import { appReducer } from './slice'
@@ -17,6 +17,6 @@ export const store = configureStore({
     carsSort: carsSortReducer,
     carsParams: carsParamsReducer,
     carSettings: carSettingsReducer,
-    carCardId: carCardIdReducer,
+    createEditCar: createEditCarReducer,
   },
 })

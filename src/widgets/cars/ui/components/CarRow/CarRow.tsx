@@ -2,10 +2,10 @@ import { FC } from 'react'
 import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
-import { setDefaultInputsVal } from '@/pages/car-card-id-page'
 import { routesPaths } from '@/shared/consts/routesPaths'
 import { getNumberWithSpaces } from '@/shared/lib/format'
 import { ButtonGroup } from '@/shared/ui/button-group'
+import { setPrefilledValues } from '@/widgets/create-edit-car'
 
 import styles from './CarRow.module.scss'
 import { CarRowProps } from './type'
@@ -40,10 +40,12 @@ export const CarRow: FC<CarRowProps> = ({ car }) => {
 
   const handleClickEdit = () => {
     dispatch(
-      setDefaultInputsVal({
+      setPrefilledValues({
+        categoryId: car.categoryId,
         description: car.description,
         name: car.name,
-        categoryId: car.categoryId,
+        priceMax: car.priceMax,
+        priceMin: car.priceMin,
         thumbnail: car.thumbnail,
       }),
     )

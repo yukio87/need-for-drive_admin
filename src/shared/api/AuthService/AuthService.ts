@@ -1,7 +1,12 @@
 import { AxiosError, AxiosResponse } from 'axios'
 import toast from 'react-hot-toast'
 
-import { AuthResponse, OrdersParams } from '@/types/type'
+import {
+  AuthResponse,
+  CarRequestBody,
+  MutateCarResponse,
+  OrdersParams,
+} from '@/types/type'
 
 import {
   urlCar,
@@ -128,6 +133,28 @@ export default class AuthService {
   static async getCar(id: string): Promise<AxiosResponse<CarResponse>> {
     headers.Authorization = `Bearer ${getCookieValue('accessToken')}`
     return $api.get(`${urlCar}/${id}`, { headers })
+  }
+
+  static async editCar(
+    id: string,
+    body: CarRequestBody,
+  ): Promise<AxiosResponse<MutateCarResponse>> {
+    headers.Authorization = `Bearer ${getCookieValue('accessToken')}`
+    return $api.put(`${urlCar}/${id}`, body, { headers })
+  }
+
+  static async deleteCar(
+    id: string,
+  ): Promise<AxiosResponse<MutateCarResponse>> {
+    headers.Authorization = `Bearer ${getCookieValue('accessToken')}`
+    return $api.delete(`${urlCar}/${id}`, { headers })
+  }
+
+  static async createCar(
+    body: CarRequestBody,
+  ): Promise<AxiosResponse<MutateCarResponse>> {
+    headers.Authorization = `Bearer ${getCookieValue('accessToken')}`
+    return $api.post(urlCar, body, { headers })
   }
 
   static async getCategories(): Promise<AxiosResponse<CategoriesResponse>> {

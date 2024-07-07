@@ -1,9 +1,16 @@
-import { FC, useState } from 'react'
+import { FC, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
+import { InputErrMsg } from '@/entities/input-err-msg'
 import { Checkbox } from '@/shared/ui/checkbox'
 
-import { addColor, getColorsObj, setIsCheckedColor } from '../../../model/slice'
+import { selectCheckedColors } from '../../../model/selectors'
+import {
+  addColor,
+  getColorsObj,
+  resetColors,
+  setIsCheckedColor,
+} from '../../../model/slice'
 import styles from './InputAddColor.module.scss'
 import { InputAddColorProps } from './type'
 
@@ -13,29 +20,44 @@ const {
   label,
   'input-container': inputContainer,
   input,
+  'input-err': inputErr,
   btn,
+  'btn-err': btnErr,
   checkboxes,
 } = styles
 
-export const InputAddColor: FC<InputAddColorProps> = ({ children, id }) => {
+export const InputAddColor: FC<InputAddColorProps> = ({
+  children,
+  id,
+  isEditSession,
+  register,
+  errors,
+  clearErrors,
+}) => {
   const [inputVal, setInputVal] = useState('')
   const colorsObj = useSelector(getColorsObj)
+  const checkedColors = useSelector(selectCheckedColors)
   const dispatch = useDispatch()
 
+  useEffect(() => {
+    if (!isEditSession) dispatch(resetColors())
+  }, [dispatch, isEditSession])
+
   const amountChecked = Object.values(colorsObj).filter((item) => item).length
+  const isValidColors = !!checkedColors.length
+  const isError = !!errors.colors
 
   const handleClick = () => {
     dispatch(addColor(inputVal))
+    clearErrors('colors')
     setInputVal('')
   }
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) =>
     setInputVal(e.target.value)
-  }
 
-  const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) =>
     dispatch(setIsCheckedColor(e.target.id))
-  }
 
   return (
     <div className={inputAddColor}>
@@ -45,21 +67,26 @@ export const InputAddColor: FC<InputAddColorProps> = ({ children, id }) => {
         </label>
         <div className={inputContainer}>
           <input
-            className={input}
+            className={isError ? inputErr : input}
             type="text"
             id={id}
             value={inputVal}
             onChange={handleInputChange}
             maxLength={30}
+            {...register('colors', {
+              validate: () => isValidColors || 'Выберите цвет(а)',
+              onChange: handleInputChange,
+            })}
           />
           <button
             disabled={!inputVal}
-            className={btn}
+            className={isError ? btnErr : btn}
             onClick={handleClick}
             type="button"
             aria-label="Добавить цвет"
           />
         </div>
+        {isError && <InputErrMsg errMsg={errors.colors.message} />}
       </div>
       <div className={checkboxes}>
         {Object.entries(colorsObj).map(([color, isChecked]) => {

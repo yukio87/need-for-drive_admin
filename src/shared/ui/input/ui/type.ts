@@ -11,4 +11,5 @@ export interface InputProps {
   register?: UseFormRegister<FieldValues>
   isError?: boolean
   maxLength?: number
+  type?: 'text' | 'number'
 }

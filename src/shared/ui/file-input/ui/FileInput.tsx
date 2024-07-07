@@ -3,14 +3,14 @@ import { forwardRef, RefObject } from 'react'
 import styles from './FileInput.module.scss'
 import { FileInputProps } from './type'
 
-const { 'file-input': fileInput, input, label, 'label-err': labelErr } = styles
+const { input, label, 'label-err': labelErr } = styles
 
 export const FileInput = forwardRef(
   (props: FileInputProps, ref: RefObject<HTMLInputElement>) => {
     const { selectedFile, isError, ...rest } = props
 
     return (
-      <div className={fileInput}>
+      <>
         <input
           className={input}
           type="file"
@@ -22,7 +22,7 @@ export const FileInput = forwardRef(
           <span>{selectedFile?.name || 'Выберите файл...'}</span>
           <span>Обзор</span>
         </label>
-      </div>
+      </>
     )
   },
 )

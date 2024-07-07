@@ -7,12 +7,12 @@
   button:last-child {
     justify-self: flex-end;
 
-    @media (max-width: 383px) {
+    @media (max-width: 767px) {
       justify-self: stretch;
     }
   }
 
-  @media (max-width: 383px) {
+  @media (max-width: 767px) {
     grid-template-columns: 1fr;
     row-gap: 8px;
   }
