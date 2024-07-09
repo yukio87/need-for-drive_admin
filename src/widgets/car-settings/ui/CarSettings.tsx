@@ -1,7 +1,7 @@
 import { FC, useContext, useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 
-import { FormContext } from '@/widgets/create-edit-car'
+import { FormContext } from '@/pages/create-edit-car-page'
 
 import { setInitColors } from '../model/slice'
 import styles from './CarSettings.module.scss'

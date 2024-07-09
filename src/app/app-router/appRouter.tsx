@@ -1,9 +1,8 @@
 import { createBrowserRouter } from 'react-router-dom'
 
 import { AppLayout } from '@/pages/app-layout'
-import { CarCardIdPage } from '@/pages/car-card-id-page'
-import { CarCardPage } from '@/pages/car-card-page'
 import { CarListPage } from '@/pages/car-list-page'
+import { CreateEditCarPage } from '@/pages/create-edit-car-page'
 import { LoginPage } from '@/pages/login-page'
 import { OrderListPage } from '@/pages/order-list-page'
 import { RegistrationPage } from '@/pages/registration-page'
@@ -41,11 +40,11 @@ export const appRouter = () => {
         },
         {
           path: pathCarCard,
-          element: <CarCardPage />,
+          element: <CreateEditCarPage />,
         },
         {
           path: `${pathCarCard}/:carId`,
-          element: <CarCardIdPage />,
+          element: <CreateEditCarPage />,
         },
       ],
     },

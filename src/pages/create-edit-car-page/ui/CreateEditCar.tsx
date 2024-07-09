@@ -11,7 +11,7 @@ import { fileToBase64 } from '@/shared/lib/convert'
 import { Loader } from '@/shared/ui/loader'
 import { CarCardInputs, CarRequestBody } from '@/types/type'
 import { CarPreview } from '@/widgets/car-preview'
-import { CarSettings, selectCheckedColors } from '@/widgets/car-settings'
+import { CarSettings, selectColors } from '@/widgets/car-settings'
 
 import { selectPrefilledValues } from '../model/selectors'
 import styles from './CreateEditCar.module.scss'
@@ -21,11 +21,11 @@ const { 'form-layout': formLayout, title } = styles
 
 export const FormContext = createContext<FormContextType>(null)
 
-export const CreateEditCar = () => {
+export const CreateEditCarPage = () => {
   const params = useParams()
   const queryClient = useQueryClient()
   const prefilledValues = useSelector(selectPrefilledValues)
-  const colors = useSelector(selectCheckedColors)
+  const colors = useSelector(selectColors)
   const navigate = useNavigate()
 
   const isEditSession = Boolean(params.carId)

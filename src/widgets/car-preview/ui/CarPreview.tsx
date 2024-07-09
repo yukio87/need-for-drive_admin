@@ -1,6 +1,6 @@
 import { FC, useContext } from 'react'
 
-import { FormContext } from '@/widgets/create-edit-car'
+import { FormContext } from '@/pages/create-edit-car-page'
 
 import styles from './CarPreview.module.scss'
 import { Description, ImageSelect, ProgressBar } from './components'
@@ -12,7 +12,7 @@ export const CarPreview: FC<CarPreviewProps> = ({ car, isEditSession }) => {
   const {
     register,
     formState: { errors },
-    getValues,
+    watch,
   } = useContext(FormContext)
 
   return (
@@ -23,7 +23,7 @@ export const CarPreview: FC<CarPreviewProps> = ({ car, isEditSession }) => {
         register={register}
         errors={errors}
       />
-      <ProgressBar getValues={getValues} errors={errors} />
+      <ProgressBar watch={watch} />
       <Description register={register} errors={errors} />
     </div>
   )

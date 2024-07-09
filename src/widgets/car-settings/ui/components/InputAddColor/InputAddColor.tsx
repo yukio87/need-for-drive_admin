@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { InputErrMsg } from '@/entities/input-err-msg'
 import { Checkbox } from '@/shared/ui/checkbox'
 
-import { selectCheckedColors } from '../../../model/selectors'
+import { selectColors } from '../../../model/selectors'
 import {
   addColor,
   getColorsObj,
@@ -36,7 +36,7 @@ export const InputAddColor: FC<InputAddColorProps> = ({
 }) => {
   const [inputVal, setInputVal] = useState('')
   const colorsObj = useSelector(getColorsObj)
-  const checkedColors = useSelector(selectCheckedColors)
+  const colors = useSelector(selectColors)
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -44,7 +44,7 @@ export const InputAddColor: FC<InputAddColorProps> = ({
   }, [dispatch, isEditSession])
 
   const amountChecked = Object.values(colorsObj).filter((item) => item).length
-  const isValidColors = !!checkedColors.length
+  const isValidColors = !!colors.length
   const isError = !!errors.colors
 
   const handleClick = () => {

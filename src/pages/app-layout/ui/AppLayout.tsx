@@ -13,19 +13,19 @@ const { 'app-layout': appLayout, main } = styles
 
 export const AppLayout = () => {
   return (
-    <QueryErrorResetBoundary>
-      {({ reset }) => (
-        <ErrorBoundary onReset={reset} FallbackComponent={ErrorFallback}>
-          <div className={appLayout}>
-            <Sidebar />
-            <Header />
-            <main className={main}>
+    <div className={appLayout}>
+      <Sidebar />
+      <Header />
+      <main className={main}>
+        <QueryErrorResetBoundary>
+          {({ reset }) => (
+            <ErrorBoundary onReset={reset} FallbackComponent={ErrorFallback}>
               <Outlet />
-            </main>
-            <Footer />
-          </div>
-        </ErrorBoundary>
-      )}
-    </QueryErrorResetBoundary>
+            </ErrorBoundary>
+          )}
+        </QueryErrorResetBoundary>
+      </main>
+      <Footer />
+    </div>
   )
 }

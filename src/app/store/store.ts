@@ -1,9 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit'
 
 import { notificationReducer } from '@/features/notifications'
+import { createEditCarReducer } from '@/pages/create-edit-car-page'
 import { carSettingsReducer } from '@/widgets/car-settings'
 import { carsParamsReducer, carsSortReducer } from '@/widgets/cars'
-import { createEditCarReducer } from '@/widgets/create-edit-car'
 import { ordersFiltersReducer, ordersParamsReducer } from '@/widgets/orders'
 
 import { appReducer } from './slice'

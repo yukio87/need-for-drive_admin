@@ -1,8 +1,8 @@
 import { FC, useState } from 'react'
 import { useSelector } from 'react-redux'
 
+import { selectPrefilledValues } from '@/pages/create-edit-car-page'
 import { FileInput } from '@/shared/ui/file-input'
-import { selectPrefilledValues } from '@/widgets/create-edit-car'
 
 import styles from './ImageSelect.module.scss'
 import { ImageSelectProps } from './type'
