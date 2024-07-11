@@ -1,10 +1,16 @@
 import { AxiosError, AxiosResponse } from 'axios'
 import toast from 'react-hot-toast'
 
-import { AuthResponse, OrdersParams } from '@/types/type'
+import {
+  AuthResponse,
+  CarRequestBody,
+  MutateCarResponse,
+  OrdersParams,
+} from '@/types/type'
 
 import {
   urlCar,
+  urlCategory,
   urlCity,
   urlLogin,
   urlLogout,
@@ -21,8 +27,10 @@ import { genRndHash } from '../../lib/generate'
 import { $api } from '../api'
 import { headers } from './consts/headers'
 import {
+  CarResponse,
   CarsParams,
   CarsResponse,
+  CategoriesResponse,
   CitiesResponse,
   ErrorResponse,
   OrdersResponse,
@@ -120,5 +128,37 @@ export default class AuthService {
   ): Promise<AxiosResponse<CarsResponse>> {
     headers.Authorization = `Bearer ${getCookieValue('accessToken')}`
     return $api.get(urlCar, { headers, params })
+  }
+
+  static async getCar(id: string): Promise<AxiosResponse<CarResponse>> {
+    headers.Authorization = `Bearer ${getCookieValue('accessToken')}`
+    return $api.get(`${urlCar}/${id}`, { headers })
+  }
+
+  static async editCar(
+    id: string,
+    body: CarRequestBody,
+  ): Promise<AxiosResponse<MutateCarResponse>> {
+    headers.Authorization = `Bearer ${getCookieValue('accessToken')}`
+    return $api.put(`${urlCar}/${id}`, body, { headers })
+  }
+
+  static async deleteCar(
+    id: string,
+  ): Promise<AxiosResponse<MutateCarResponse>> {
+    headers.Authorization = `Bearer ${getCookieValue('accessToken')}`
+    return $api.delete(`${urlCar}/${id}`, { headers })
+  }
+
+  static async createCar(
+    body: CarRequestBody,
+  ): Promise<AxiosResponse<MutateCarResponse>> {
+    headers.Authorization = `Bearer ${getCookieValue('accessToken')}`
+    return $api.post(urlCar, body, { headers })
+  }
+
+  static async getCategories(): Promise<AxiosResponse<CategoriesResponse>> {
+    headers.Authorization = `Bearer ${getCookieValue('accessToken')}`
+    return $api.get(urlCategory, { headers })
   }
 }

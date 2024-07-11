@@ -1,0 +1,103 @@
+@import '@/app/styles/sass/abstracts/_mixins';
+
+@mixin typehead-styles {
+  :global(.rbt) {
+    width: 100%;
+  }
+
+  :global(.rbt-input-main) {
+    overflow: hidden;
+
+    padding: 8px 11px;
+
+    font-family: Helvetica, sans-serif;
+    font-size: 11px;
+    font-weight: 400;
+    line-height: 12.65px;
+    color: var(--c-black);
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+    border-radius: 4px;
+
+    &::placeholder {
+      font-size: 11px;
+      line-height: 12.65px;
+      color: rgb(134 142 150 / 100%);
+    }
+
+    &:focus {
+      border-color: var(--c-grey);
+      box-shadow: none;
+    }
+  }
+
+  :global(.rbt-menu) {
+    font-family: Helvetica, sans-serif;
+    font-size: 11px;
+    border-color: var(--c-grey);
+  }
+
+  :global(.dropdown-item) {
+    overflow: hidden;
+    color: var(--c-black);
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+    &:active {
+      background-color: rgb(203 228 255);
+    }
+  }
+
+  :global(.rbt-highlight-text) {
+    background-color: rgb(203 228 255);
+  }
+}
+
+.input-group {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 320px);
+  gap: 28px 21px;
+  align-content: start;
+
+  @media (max-width: 767px) {
+    grid-template-columns: 1fr;
+    row-gap: 22px;
+  }
+}
+
+.input-container {
+  display: flex;
+  flex-direction: column;
+  gap: 4.5px;
+}
+
+.label {
+  cursor: default;
+
+  font-size: 10.5px;
+  line-height: 12.07px;
+  color: rgb(73 80 87 / 100%);
+  letter-spacing: -0.18px;
+}
+
+.icon-wrapper {
+  @include table-icon-wrapper();
+}
+
+.typehead {
+  @include typehead-styles();
+
+  :global(.rbt-input-main) {
+    border: 1px solid var(--c-grey);
+  }
+}
+
+.typehead-err {
+  @include typehead-styles();
+
+  :global(.rbt-input-main) {
+    border: 1px solid rgb(196 24 60 / 100%);
+    box-shadow: 0 0 3px 1px rgb(196 24 60 / 10%);
+  }
+}

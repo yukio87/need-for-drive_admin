@@ -1,4 +1,6 @@
+import { AxiosError } from 'axios'
+
 export interface ErrorFallbackProps {
-  error: Error
+  error: AxiosError
   resetErrorBoundary: () => void
 }

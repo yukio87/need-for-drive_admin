@@ -1,0 +1,54 @@
+.image-select {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+
+  padding: 34.5px 22px 22px;
+}
+
+.img {
+  width: 243.5px;
+  height: 110px;
+  object-fit: cover;
+}
+
+.car-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4.5px;
+  align-items: center;
+}
+
+.car-name {
+  font-family: Helvetica, sans-serif;
+  font-size: 24.5px;
+  line-height: 28.17px;
+  color: var(--c-text-primary);
+  text-align: center;
+  letter-spacing: -0.61px;
+}
+
+.car-category {
+  font-family: Helvetica, sans-serif;
+  font-size: 12.5px;
+  line-height: 14.37px;
+  color: rgb(129 142 163 / 100%);
+  letter-spacing: -0.31px;
+}
+
+.label {
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 15.23px;
+  color: rgb(134 142 150 / 100%);
+  letter-spacing: -0.41px;
+}
+
+.file-input-wrapper {
+  width: 231.5px;
+
+  @media (max-width: 348px) {
+    width: 200px;
+  }
+}

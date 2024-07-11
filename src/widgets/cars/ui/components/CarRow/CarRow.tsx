@@ -1,5 +1,9 @@
 import { FC } from 'react'
+import { useDispatch } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 
+import { setPrefilledValues } from '@/pages/create-edit-car-page'
+import { routesPaths } from '@/shared/consts/routesPaths'
 import { getNumberWithSpaces } from '@/shared/lib/format'
 import { ButtonGroup } from '@/shared/ui/button-group'
 
@@ -20,6 +24,10 @@ const {
 } = styles
 
 export const CarRow: FC<CarRowProps> = ({ car }) => {
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
+
+  const { pathCarCard } = routesPaths
   const { categoryId, colors, name, thumbnail, priceMin, priceMax } = car
 
   const handleClickCheck = () => {
@@ -31,7 +39,18 @@ export const CarRow: FC<CarRowProps> = ({ car }) => {
   }
 
   const handleClickEdit = () => {
-    // console.log(`click edit on car with id ${car.id}`)
+    dispatch(
+      setPrefilledValues({
+        categoryId: [car.categoryId],
+        colors: '',
+        description: car.description,
+        name: car.name,
+        priceMax: String(car.priceMax),
+        priceMin: String(car.priceMin),
+        thumbnail: car.thumbnail,
+      }),
+    )
+    navigate(`${pathCarCard}/${car.id}`)
   }
 
   return (

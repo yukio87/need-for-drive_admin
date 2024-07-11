@@ -1,6 +1,6 @@
 import { routesPaths } from '@/shared/consts/routesPaths'
 
-const { pathCarList, pathCarSettings } = routesPaths
+const { pathCarList, pathCarCard } = routesPaths
 
 export const navList = [
   {
@@ -16,6 +16,6 @@ export const navList = [
   {
     navIconName: 'IconAddPosts',
     navText: 'Карточка автомобиля',
-    navPath: pathCarSettings,
+    navPath: pathCarCard,
   },
 ]

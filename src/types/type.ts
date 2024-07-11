@@ -40,7 +40,7 @@ interface carId {
   updatedAt: string
 }
 
-interface Thumbnail {
+export interface Thumbnail {
   path: string
   size: number
 }
@@ -91,7 +91,7 @@ export interface Car {
   updatedAt: string
 }
 
-interface CategoryId {
+export interface CategoryId {
   createdAt: string
   description: string
   id: number
@@ -108,4 +108,39 @@ export interface OrdersParams {
 export interface CarsSortPayload {
   pointName: 'name' | 'priceMin'
   value: '1' | '-1'
+}
+
+export interface CarCardInputs {
+  categoryId: CategoryId[]
+  colors: string
+  description: string
+  name: string
+  priceMax: string
+  priceMin: string
+  thumbnail: FileList
+}
+
+export interface CarRequestBody {
+  priceMax: string
+  priceMin: string
+  name: string
+  thumbnail: Thumbnail
+  description: string
+  categoryId: CategoryId
+  colors: string[]
+}
+
+export interface MutateCarResponse {
+  data: {
+    categoryId: CategoryId
+    colors: string[]
+    createdAt: string
+    description: string
+    id: number
+    name: string
+    priceMax: number
+    priceMin: number
+    tank: null | string
+    thumbnail: Thumbnail
+  }
 }

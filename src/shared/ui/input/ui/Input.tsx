@@ -1,38 +1,26 @@
-import { FC } from 'react'
+import { forwardRef, RefObject } from 'react'
 
-import { Icon } from '../../icon'
-import { iconStyles } from '../consts/styles'
 import styles from './Input.module.scss'
 import { InputProps } from './type'
 
-const { 'form-input': formInput, 'icon-wrapper': iconWrapper } = styles
+const { 'form-input': formInput, label, input, 'input-err': inputErr } = styles
 
-export const Input: FC<InputProps> = ({
-  size = 'small',
-  hasLabel = false,
-  children,
-  id,
-  placeholder,
-  value,
-  onChange,
-}) => {
-  return (
-    <div className={formInput}>
-      {hasLabel && <label htmlFor={id}>{children}</label>}
-      {size === 'big' && (
-        <div className={iconWrapper}>
-          <Icon name="IconSearch" styles={iconStyles} />
-        </div>
-      )}
+export const Input = forwardRef(
+  (props: InputProps, ref: RefObject<HTMLInputElement>) => {
+    const { children, id, isError, ...rest } = props
 
-      <input
-        className={styles[size]}
-        type="text"
-        id={id}
-        placeholder={placeholder}
-        value={value}
-        onChange={onChange}
-      />
-    </div>
-  )
-}
+    return (
+      <div className={formInput}>
+        <label className={label} htmlFor={id}>
+          {children}
+        </label>
+        <input
+          className={`${isError ? inputErr : input}`}
+          id={id}
+          ref={ref}
+          {...rest}
+        />
+      </div>
+    )
+  },
+)
