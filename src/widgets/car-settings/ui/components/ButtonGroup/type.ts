@@ -1,7 +1,8 @@
 import { UseMutateFunction } from '@tanstack/react-query'
 import { AxiosError, AxiosResponse } from 'axios'
+import { UseFormReset } from 'react-hook-form'
 
-import { MutateCarResponse } from '@/types/type'
+import { CarCardInputs, MutateCarResponse } from '@/types/type'
 
 export interface ButtonGroupProps {
   isEditSession: boolean
@@ -11,4 +12,5 @@ export interface ButtonGroupProps {
     void,
     unknown
   >
+  reset: UseFormReset<CarCardInputs>
 }

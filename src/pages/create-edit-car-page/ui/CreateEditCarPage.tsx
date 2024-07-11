@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
-import { createContext, useEffect } from 'react'
+import { createContext } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import toast from 'react-hot-toast'
 import { useSelector } from 'react-redux'
@@ -72,18 +72,6 @@ export const CreateEditCarPage = () => {
     mode: 'onSubmit',
     defaultValues: isEditSession ? prefilledValues : defaultValues,
   })
-
-  // useEffect(() => {
-  //   methods.reset(isEditSession ? prefilledValues : defaultValues)
-  // }, [isEditSession, methods, prefilledValues])
-
-  useEffect(() => {
-    // console.log('effect')
-    return () => {
-      // console.log('clean up')
-      methods.reset(defaultValues)
-    }
-  }, [methods, isEditSession])
 
   const isWorking = isLoadingCar || isEditing || isDeleting || isCreating
 

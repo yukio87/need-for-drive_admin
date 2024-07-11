@@ -22,6 +22,7 @@ export const CarSettings: FC<CarSettingsProps> = ({
     formState: { errors },
     control,
     clearErrors,
+    reset,
   } = useContext(FormContext)
 
   useEffect(() => {
@@ -39,7 +40,11 @@ export const CarSettings: FC<CarSettingsProps> = ({
         errors={errors}
         clearErrors={clearErrors}
       />
-      <ButtonGroup isEditSession={isEditSession} deleteCar={deleteCar} />
+      <ButtonGroup
+        isEditSession={isEditSession}
+        deleteCar={deleteCar}
+        reset={reset}
+      />
     </div>
   )
 }

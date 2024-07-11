@@ -30,5 +30,6 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <ToastsProvider />
       </QueryClientProvider>
     </Provider>
+    , //{' '}
   </React.StrictMode>,
 )

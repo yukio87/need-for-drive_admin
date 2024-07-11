@@ -1,6 +1,6 @@
 import { FC } from 'react'
-import { useNavigate } from 'react-router-dom'
 
+import { defaultValues } from '@/pages/create-edit-car-page'
 import { Button } from '@/shared/ui/button'
 
 import styles from './ButtonGroup.module.scss'
@@ -11,10 +11,9 @@ const { 'button-group': buttonGroup } = styles
 export const ButtonGroup: FC<ButtonGroupProps> = ({
   isEditSession,
   deleteCar,
+  reset,
 }) => {
-  const navigate = useNavigate()
-
-  const handleReset = () => navigate(-1)
+  const handleReset = () => reset(defaultValues)
   const handleDelete = () => deleteCar()
 
   return (
