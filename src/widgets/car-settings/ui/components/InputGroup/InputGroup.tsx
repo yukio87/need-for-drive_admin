@@ -59,7 +59,7 @@ export const InputGroup: FC<InputGroupProps> = ({
         name="categoryId"
         control={control}
         rules={{
-          required: 'Поле обязательно к заполнению',
+          validate: (v) => !!v[0]?.id || 'Поле обязательно к заполнению',
         }}
         render={({ field, fieldState }) => (
           <div className={inputContainer}>
@@ -68,7 +68,7 @@ export const InputGroup: FC<InputGroupProps> = ({
               {...field}
               className={errors.categoryId ? typeheadErr : typehead}
               id="categoryId"
-              onChange={(s: CategoryId[]) => field.onChange(s[0])}
+              onChange={(s: CategoryId[]) => field.onChange(s)}
               options={categories || []}
               labelKey="name"
               emptyLabel={

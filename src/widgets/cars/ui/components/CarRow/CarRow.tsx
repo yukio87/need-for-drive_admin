@@ -41,11 +41,12 @@ export const CarRow: FC<CarRowProps> = ({ car }) => {
   const handleClickEdit = () => {
     dispatch(
       setPrefilledValues({
-        categoryId: car.categoryId,
+        categoryId: [car.categoryId],
+        colors: '',
         description: car.description,
         name: car.name,
-        priceMax: car.priceMax,
-        priceMin: car.priceMin,
+        priceMax: String(car.priceMax),
+        priceMin: String(car.priceMin),
         thumbnail: car.thumbnail,
       }),
     )

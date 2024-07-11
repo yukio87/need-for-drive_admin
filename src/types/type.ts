@@ -111,18 +111,18 @@ export interface CarsSortPayload {
 }
 
 export interface CarCardInputs {
-  categoryId: CategoryId
-  colors: string[]
+  categoryId: CategoryId[]
+  colors: string
   description: string
   name: string
-  priceMax: number
-  priceMin: number
+  priceMax: string
+  priceMin: string
   thumbnail: FileList
 }
 
 export interface CarRequestBody {
-  priceMax: number
-  priceMin: number
+  priceMax: string
+  priceMin: string
   name: string
   thumbnail: Thumbnail
   description: string

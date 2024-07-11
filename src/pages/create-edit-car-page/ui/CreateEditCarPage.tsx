@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
-import { createContext } from 'react'
+import { createContext, useEffect } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import toast from 'react-hot-toast'
 import { useSelector } from 'react-redux'
@@ -13,8 +13,9 @@ import { CarCardInputs, CarRequestBody } from '@/types/type'
 import { CarPreview } from '@/widgets/car-preview'
 import { CarSettings, selectColors } from '@/widgets/car-settings'
 
+import { defaultValues } from '../consts/defaultValues'
 import { selectPrefilledValues } from '../model/selectors'
-import styles from './CreateEditCar.module.scss'
+import styles from './CreateEditCarPage.module.scss'
 import { FormContextType } from './type'
 
 const { 'form-layout': formLayout, title } = styles
@@ -69,8 +70,20 @@ export const CreateEditCarPage = () => {
 
   const methods = useForm<CarCardInputs>({
     mode: 'onSubmit',
-    defaultValues: isEditSession ? prefilledValues : {},
+    defaultValues: isEditSession ? prefilledValues : defaultValues,
   })
+
+  // useEffect(() => {
+  //   methods.reset(isEditSession ? prefilledValues : defaultValues)
+  // }, [isEditSession, methods, prefilledValues])
+
+  useEffect(() => {
+    // console.log('effect')
+    return () => {
+      // console.log('clean up')
+      methods.reset(defaultValues)
+    }
+  }, [methods, isEditSession])
 
   const isWorking = isLoadingCar || isEditing || isDeleting || isCreating
 
@@ -79,6 +92,7 @@ export const CreateEditCarPage = () => {
 
     const dataToSend = {
       ...data,
+      categoryId: data.categoryId[0],
       colors,
       thumbnail: { path: imgBase64, size: data.thumbnail[0].size },
     }

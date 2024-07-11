@@ -3,17 +3,20 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { InitialState, Payload } from './type'
 
 const initialState: InitialState = {
-  categoryId: {
-    createdAt: '',
-    description: '',
-    id: 0,
-    name: '',
-    updatedAt: '',
-  },
+  categoryId: [
+    {
+      createdAt: '',
+      description: '',
+      id: 0,
+      name: '',
+      updatedAt: '',
+    },
+  ],
+  colors: '',
   description: '',
   name: '',
-  priceMax: 0,
-  priceMin: 0,
+  priceMax: '',
+  priceMin: '',
   thumbnail: {
     path: '',
     size: 0,

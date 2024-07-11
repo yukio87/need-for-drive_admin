@@ -1,11 +1,12 @@
 import { CategoryId, Thumbnail } from '@/types/type'
 
 export interface InitialState {
-  categoryId: CategoryId
+  categoryId: CategoryId[]
+  colors: string
   description: string
   name: string
-  priceMax: number
-  priceMin: number
+  priceMax: string
+  priceMin: string
   thumbnail: Thumbnail
 }
 

@@ -12,7 +12,7 @@ export const CarPreview: FC<CarPreviewProps> = ({ car, isEditSession }) => {
   const {
     register,
     formState: { errors },
-    watch,
+    control,
   } = useContext(FormContext)
 
   return (
@@ -23,7 +23,7 @@ export const CarPreview: FC<CarPreviewProps> = ({ car, isEditSession }) => {
         register={register}
         errors={errors}
       />
-      <ProgressBar watch={watch} />
+      <ProgressBar control={control} />
       <Description register={register} errors={errors} />
     </div>
   )
